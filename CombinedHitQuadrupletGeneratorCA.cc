@@ -25,7 +25,7 @@ theSeedingLayerToken(iC.consumes<SeedingLayerSetsHits>(cfg.getParameter<edm::Inp
 
 CombinedHitQuadrupletGeneratorCA::~CombinedHitQuadrupletGeneratorCA() {}
 
-void CombinedHitQuadrupletGenerator::hitQuadruplets(
+void CombinedHitQuadrupletGeneratorCA::hitQuadruplets(
                                                     const TrackingRegion& region, OrderedHitSeeds & result,
                                                     const edm::Event& ev, const edm::EventSetup& es)
 {
