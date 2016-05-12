@@ -33,9 +33,14 @@ public:
                                 ) override;
 
 private:
-  const bool useFixedPreFiltering;
   const float extraHitRZtolerance;
   const float extraHitRPhitolerance;
+  const QuantityDependsPt extraPhiTolerance;
+  const QuantityDependsPt maxChi2;
+  const bool fitFastCircle;
+  const bool fitFastCircleChi2Cut;
+  const bool useBendingCorrection;
+  const bool useFixedPreFiltering;
   const bool useMScat;
   const bool useBend;
   const float dphi;
