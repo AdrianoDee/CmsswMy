@@ -33,17 +33,7 @@ public:
                                 ) override;
 
 private:
-  const float extraHitRZtolerance;
-  const float extraHitRPhitolerance;
-  const QuantityDependsPt extraPhiTolerance;
-  const QuantityDependsPt maxChi2;
-  const bool fitFastCircle;
-  const bool fitFastCircleChi2Cut;
-  const bool useBendingCorrection;
-  const bool useFixedPreFiltering;
-  const bool useMScat;
-  const bool useBend;
-  const float dphi;
+
   std::unique_ptr<SeedComparitor> theComparitor;
     
     class QuantityDependsPtEval {
@@ -108,6 +98,17 @@ private:
         const bool enabled_;
     };
 
+    const float extraHitRZtolerance;
+    const float extraHitRPhitolerance;
+    const QuantityDependsPt extraPhiTolerance;
+    const QuantityDependsPt maxChi2;
+    const bool fitFastCircle;
+    const bool fitFastCircleChi2Cut;
+    const bool useBendingCorrection;
+    const bool useFixedPreFiltering;
+    const bool useMScat;
+    const bool useBend;
+    const float dphi;
 };
 #endif
 
