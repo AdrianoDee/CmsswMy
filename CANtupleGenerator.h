@@ -9,8 +9,7 @@
 #include "RecoTracker/TkHitPairs/interface/LayerFKDTreeCache.h"
 #include <vector>
 
-namespace edm { class ParameterSet; class Event; class EventSetup; class ConsumesCollector; }
-class TrackingRegion;
+
 class HitPairGeneratorFromLayerPairCA;
 
 class CANtupleGenerator {
@@ -34,7 +33,6 @@ protected:
     
   std::unique_ptr<HitPairGeneratorFromLayerPairCA>&& theDoubletsGeneratorCA;
   
-  const unsigned int theMaxElement;
 };
 #endif
 
