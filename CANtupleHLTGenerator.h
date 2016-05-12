@@ -1,6 +1,14 @@
 #ifndef CANtupleHLTGenerator_H
 #define CANtupleHLTGenerator_H
 
+#include "CombinedHitQuadrupletGeneratorCA.h"
+#include "RecoTracker/TkMSParametrization/interface/PixelRecoUtilities.h"
+#include "RecoTracker/TkHitPairs/interface/HitPairGeneratorFromLayerPairCA.h"
+
+#include "FWCore/Framework/interface/ESHandle.h"
+#include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+#include "MagneticField/Engine/interface/MagneticField.h"
+
 //#include "RecoPixelVertexing/PixelTriplets/interface/HitQuadrupletGenerator.h"
 #include "RecoPixelVertexing/PixelTriplets/interface/OrderedHitSeeds.h"
 #include "FWCore/Framework/interface/EventSetup.h"
