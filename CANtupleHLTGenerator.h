@@ -2,7 +2,7 @@
 #define CANtupleHLTGenerator_H
 
 //#include "RecoPixelVertexing/PixelTriplets/interface/HitQuadrupletGenerator.h"
-#include "RecoTracker/TkSeedingLayers/interface/SeedingHitSet.h"
+#include "RecoPixelVertexing/PixelTriplets/interface/OrderedHitSeeds.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "RecoPixelVertexing/PixelTriplets/interface/CANtupleGenerator.h"
@@ -19,7 +19,7 @@ public:
 
   virtual ~CANtupleHLTGenerator();
 
-    virtual void getNTuplets(const TrackingRegion& region, SeedingHitSet & ntuplets,
+    virtual void getNTuplets(const TrackingRegion& region, OrderedHitSeeds & ntuplets,
                                 const edm::Event & ev, const edm::EventSetup& es,
                                 SeedingLayerSetsHits::SeedingLayerSet fourLayers
                                 ) override;

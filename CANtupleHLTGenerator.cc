@@ -49,7 +49,7 @@ CANtupleHLTGenerator:: CANtupleHLTGenerator(const edm::ParameterSet& cfg, edm::C
 CANtupleHLTGenerator::~CANtupleHLTGenerator() {}
 
 void CANtupleHLTGenerator::getNTuplets(const TrackingRegion& region,
-                                          SeedingHitSet & ntuplets,
+                                          OrderedHitSeeds & ntuplets,
                                           const edm::Event & ev,
                                           const edm::EventSetup& es,
                                           SeedingLayerSetsHits::SeedingLayerSet fourLayers
