@@ -7,6 +7,7 @@
 #include "RecoTracker/TkHitPairs/interface/LayerDoubletsCache.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Utilities/interface/EDGetToken.h"
+#include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
 
 #include <string>
 #include <memory>
