@@ -3,7 +3,6 @@
 
 //#include "RecoPixelVertexing/PixelTriplets/interface/OrderedHitQuadruplets.h"
 //#include "RecoPixelVertexing/PixelTriplets/interface/OrderedHitTriplets.h"
-#include "RecoTracker/TkHitPairs/interface/HitPairGeneratorFromLayerPairCA.h"
 #include "RecoPixelVertexing/PixelTriplets/interface/OrderedHitSeeds.h"
 #include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
 #include "RecoTracker/TkHitPairs/interface/LayerDoubletsCache.h"
@@ -18,8 +17,8 @@ class CANtupleGenerator {
 
 public:
 
-  explicit CANtupleGenerator(unsigned int maxElement=0);
-  explicit CANtupleGenerator(const edm::ParameterSet& pset);
+  CANtupleGenerator();
+    
   virtual ~CANtupleGenerator();
 
   void init(std::unique_ptr<HitPairGeneratorFromLayerPairCA>&& doubletsGenerator,LayerFKDTreeCache *kdTReeCache,LayerDoubletsCache *doubletsCache);
