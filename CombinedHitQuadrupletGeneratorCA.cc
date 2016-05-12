@@ -20,7 +20,7 @@ theSeedingLayerToken(iC.consumes<SeedingLayerSetsHits>(cfg.getParameter<edm::Inp
     std::string cantupleGeneratorName = cantupleGeneratorPSet.getParameter<std::string>("ComponentName");
     
     theGenerator.reset(CANtupleGeneratorFactory::get()->create(generatorName, generatorPSet, iC));
-    theGenerator->init(std::make_unique<HitPairGeneratorFromLayerPairCA>(0, 1), &theLayerCache, &theDoubletsCache);
+    theGenerator->init(std::make_unique<HitPairGeneratorFromLayerPairCA>(0, 1), &theKDTReeCache, &theDoubletsCache);
 }
 
 CombinedHitQuadrupletGeneratorCA::~CombinedHitQuadrupletGeneratorCA() {}
