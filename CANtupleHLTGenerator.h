@@ -107,7 +107,6 @@ private:
     const bool useBendingCorrection;
     const bool useFixedPreFiltering;
     const bool useMScat;
-    const bool useBend;
     const float dphi;
 };
 #endif

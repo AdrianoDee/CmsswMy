@@ -30,16 +30,17 @@ using Range=PixelRecoRange<float>;
 using namespace ctfseeding;
 
 CANtupleHLTGenerator:: CANtupleHLTGenerator(const edm::ParameterSet& cfg, edm::ConsumesCollector& iC)
-:   extraPhiTolerance(cfg.getParameter<edm::ParameterSet>("extraPhiTolerance")),
+:
+    extraHitRZtolerance(cfg.getParameter<double>("extraHitRZtolerance")),
+    extraHitRPhitolerance(cfg.getParameter<double>("extraHitRPhitolerance")),
+    extraPhiTolerance(cfg.getParameter<edm::ParameterSet>("extraPhiTolerance")),
     maxChi2(cfg.getParameter<edm::ParameterSet>("maxChi2")),
     fitFastCircle(cfg.getParameter<bool>("fitFastCircle")),
     fitFastCircleChi2Cut(cfg.getParameter<bool>("fitFastCircleChi2Cut")),
     useBendingCorrection(cfg.getParameter<bool>("useBendingCorrection"))
     useFixedPreFiltering(cfg.getParameter<bool>("useFixedPreFiltering")),
-    extraHitRZtolerance(cfg.getParameter<double>("extraHitRZtolerance")),
-    extraHitRPhitolerance(cfg.getParameter<double>("extraHitRPhitolerance")),
     useMScat(cfg.getParameter<bool>("useMultScattering")),
-    dphi(useFixedPreFiltering ?  cfg.getParameter<double>("phiPreFiltering") : 0) 
+    dphi(useFixedPreFiltering ?  cfg.getParameter<double>("phiPreFiltering") : 0)
 {  
   edm::ParameterSet comparitorPSet =
     cfg.getParameter<edm::ParameterSet>("SeedComparitorPSet");
