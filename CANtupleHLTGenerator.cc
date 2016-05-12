@@ -30,12 +30,15 @@ using Range=PixelRecoRange<float>;
 using namespace ctfseeding;
 
 CANtupleHLTGenerator:: CANtupleHLTGenerator(const edm::ParameterSet& cfg, edm::ConsumesCollector& iC)
-  : CANtupleGenerator(cfg),
+:   extraPhiTolerance(cfg.getParameter<edm::ParameterSet>("extraPhiTolerance")),
+    maxChi2(cfg.getParameter<edm::ParameterSet>("maxChi2")),
+    fitFastCircle(cfg.getParameter<bool>("fitFastCircle")),
+    fitFastCircleChi2Cut(cfg.getParameter<bool>("fitFastCircleChi2Cut")),
+    useBendingCorrection(cfg.getParameter<bool>("useBendingCorrection"))
     useFixedPreFiltering(cfg.getParameter<bool>("useFixedPreFiltering")),
     extraHitRZtolerance(cfg.getParameter<double>("extraHitRZtolerance")),
     extraHitRPhitolerance(cfg.getParameter<double>("extraHitRPhitolerance")),
     useMScat(cfg.getParameter<bool>("useMultScattering")),
-    useBend(cfg.getParameter<bool>("useBending")),
     dphi(useFixedPreFiltering ?  cfg.getParameter<double>("phiPreFiltering") : 0) 
 {  
   edm::ParameterSet comparitorPSet =
