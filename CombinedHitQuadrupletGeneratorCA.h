@@ -27,8 +27,6 @@ public:
   virtual void hitQuadruplets( const TrackingRegion& reg, OrderedHitSeeds & triplets,
                                 const edm::Event & ev,  const edm::EventSetup& es);
     
-  virtual void clear() final;
-
 private:
     
   edm::EDGetTokenT<SeedingLayerSetsHits> theSeedingLayerToken;
