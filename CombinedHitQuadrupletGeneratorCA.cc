@@ -35,8 +35,8 @@ void CombinedHitQuadrupletGeneratorCA::hitQuadruplets(
     if(layers.numberOfLayersInSet() != 4)
         throw cms::Exception("Configuration") << "CombinedHitQuadrupletsGenerator expects SeedingLayerSetsHits::numberOfLayersInSet() to be 4, got " << layers.numberOfLayersInSet();
     
-    for(const auto& setFourLayers: hlayers) {
-        theGenerator->getNTuplets(region, result, ev, es, layers);
+    for(const auto setFourLayers: hlayers) {
+        theGenerator->getNTuplets(region, result, ev, es, *layers);
     }
     
     theCACellsCache.clear();
