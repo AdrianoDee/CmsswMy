@@ -37,7 +37,7 @@ CANtupleHLTGenerator:: CANtupleHLTGenerator(const edm::ParameterSet& cfg, edm::C
     maxChi2(cfg.getParameter<edm::ParameterSet>("maxChi2")),
     fitFastCircle(cfg.getParameter<bool>("fitFastCircle")),
     fitFastCircleChi2Cut(cfg.getParameter<bool>("fitFastCircleChi2Cut")),
-    useBendingCorrection(cfg.getParameter<bool>("useBendingCorrection"))
+    useBendingCorrection(cfg.getParameter<bool>("useBendingCorrection")),
     useFixedPreFiltering(cfg.getParameter<bool>("useFixedPreFiltering")),
     useMScat(cfg.getParameter<bool>("useMultScattering")),
     dphi(useFixedPreFiltering ?  cfg.getParameter<double>("phiPreFiltering") : 0)
