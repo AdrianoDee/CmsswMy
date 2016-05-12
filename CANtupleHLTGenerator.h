@@ -9,7 +9,7 @@
 
 #include <utility>
 #include <vector>
-//
+
 class SeedComparitor;
 
 class CANtupleHLTGenerator : public CANtupleGenerator {

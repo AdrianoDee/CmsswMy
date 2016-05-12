@@ -39,7 +39,7 @@ void CombinedHitQuadrupletGeneratorCA::hitQuadruplets(
         theGenerator->getNTuplets(region, result, ev, es, layers[j]);
     }
     
-    theCACellsCache.clear();
+    theDoubletsCache.clear();
     theKDTReeCache.clear();
 
 }
