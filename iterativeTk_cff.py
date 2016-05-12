@@ -74,6 +74,25 @@ eras.trackingPhase1.toReplaceWith(iterTracking, cms.Sequence(
     ConvStep +
     conversionStepTracks
 ))
+eras.trackingPhase1.toReplaceWith(iterTracking, cms.Sequence(
+                                                             InitialStepPreSplitting +
+                                                             InitialStep +
+                                                             HighPtTripletStep +
+                                                             DetachedQuadStep +
+                                                             #DetachedTripletStep + # FIXME: dropped for time being, but it may be enabled on the course of further tuning
+                                                             LowPtQuadStep +
+                                                             LowPtTripletStep +
+                                                             MixedTripletStep +
+                                                             PixelLessStep +
+                                                             TobTecStep +
+                                                             JetCoreRegionalStep +
+                                                             earlyGeneralTracks +
+                                                             muonSeededStep +
+                                                             preDuplicateMergingGeneralTracks +
+                                                             generalTracksSequence +
+                                                             ConvStep +
+                                                             conversionStepTracks
+                                                             ))
 eras.trackingPhase1PU70.toReplaceWith(iterTracking, cms.Sequence(
     InitialStepPreSplitting +
     InitialStep +
