@@ -27,11 +27,10 @@ public:
                              SeedingLayerSetsHits::SeedingLayerSet fourLayers
                              ) = 0;
 protected:
-    
   LayerFKDTreeCache *theKDTreeCache;
   LayerDoubletsCache *theDoubletsCache;
     
-  std::unique_ptr<HitPairGeneratorFromLayerPairCA>&& theDoubletsGeneratorCA;
+  std::unique_ptr<HitPairGeneratorFromLayerPairCA> theDoubletsGeneratorCA;
   
 };
 #endif
