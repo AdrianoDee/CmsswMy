@@ -23,12 +23,10 @@ public:
   CombinedHitQuadrupletGeneratorCA( const edm::ParameterSet& cfg, edm::ConsumesCollector& iC);
     
   virtual ~CombinedHitQuadrupletGeneratorCA();
-
-  virtual const OrderedHitSeeds& run(const TrackingRegion& region, const edm::Event & ev, const edm::EventSetup& es) final;
     
   virtual void hitQuadruplets( const TrackingRegion& reg, OrderedHitSeeds & triplets,
                                 const edm::Event & ev,  const edm::EventSetup& es);
-
+    
   virtual void clear() final;
 
 private:
