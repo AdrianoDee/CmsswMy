@@ -24,7 +24,7 @@ public:
     
   virtual ~CombinedHitQuadrupletGeneratorCA();
 
-  virtual const SeedingHitSet& run(const TrackingRegion& region, const edm::Event & ev, const edm::EventSetup& es) final;
+  virtual const OrderedHitSeeds& run(const TrackingRegion& region, const edm::Event & ev, const edm::EventSetup& es) final;
     
   virtual void hitQuadruplets( const TrackingRegion& reg, OrderedHitSeeds & triplets,
                                 const edm::Event & ev,  const edm::EventSetup& es);
