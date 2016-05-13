@@ -1,10 +1,9 @@
 #include "RecoPixelVertexing/PixelTriplets/interface/CANtupleGenerator.h"
 #include "RecoTracker/TkHitPairs/interface/HitPairGeneratorFromLayerPairCA.h"
 
-CANtupleGenerator::CANtupleGenerator(unsigned int maxElement):
+CANtupleGenerator::CANtupleGenerator():
 theKDTreeCache(nullptr),
 theDoubletsCache(nullptr),
-theMaxElement(maxElement)
 {}
 
 CANtupleGenerator::~CANtupleGenerator() {}

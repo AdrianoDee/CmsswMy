@@ -79,8 +79,8 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     for(int j=0;j <(int)CADoublets.size();j++){
         std::cout<<" [ "<<CADoublets.innerHitId(j) <<" - "<<CADoublets.outerHitId(j)<<" ]  ";
     }
-    for(int j=0;j <(int)doublets->size();j++){
-        std::cout<<" [ "<<doublets->innerHitId(j) <<" - "<<doublets->outerHitId(j)<<" ]  ";
+    for(int j=0;j <(int)doublets.size();j++){
+        std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets->outerHitId(j)<<" ]  ";
     }
   
   if (doublets.empty()) return;
