@@ -71,6 +71,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   LayerTree * alberoFuori = nullptr;
   alberoFuori->FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
   alberoFuori->FKDTree<float,3>::build();
+  if(corretto) std::cout<<"Built?"<<std::endl;  
   bool corretto = alberoFuori->FKDTree<float,3>::test_correct_build();
   if(corretto) std::cout<<"Tree Correctly Built"<<std::endl;
   HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
