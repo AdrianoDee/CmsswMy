@@ -3,7 +3,7 @@
 
 CANtupleGenerator::CANtupleGenerator():
 theKDTreeCache(nullptr),
-theDoubletsCache(nullptr),
+theDoubletsCache(nullptr)
 {}
 
 CANtupleGenerator::~CANtupleGenerator() {}
