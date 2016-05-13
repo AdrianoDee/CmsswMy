@@ -16,7 +16,7 @@ class CANtupleGenerator {
 
 public:
 
-  CANtupleGenerator();
+  CANtupleGenerator(unsigned int maxElement=0);
     
   virtual ~CANtupleGenerator();
 
