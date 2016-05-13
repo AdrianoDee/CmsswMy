@@ -63,6 +63,20 @@ public:
         
     }
     
+    void init(const std::vector<FKDPoint<TYPE, numberOfDimensions> >& points)
+    {
+        theNumberOfPoints = points.size();
+        theDepth = FLOOR_LOG2(theNumberOfPoints);
+        for (auto& x : theDimensions)
+            x.resize(theNumberOfPoints);
+        theIntervalLength.resize(theNumberOfPoints, 0);
+        theIntervalMin.resize(theNumberOfPoints, 0);
+        theIds.resize(theNumberOfPoints, 0);
+        thePoints = points;
+        build();
+        
+    }
+    
     FKDTree()
     {
         theNumberOfPoints = 0;
@@ -488,7 +502,7 @@ public:
         
     }
     
-    FKDTree<TYPE, numberOfDimensions> make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
+    void make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup, FKDTree<TYPE, numberOfDimensions>& tree)
     {
         std::cout<<"Make Tree From Region Layer : in!"<<std::endl;
         static_assert( numberOfDimensions == 3, "Only for 3-dim trees!" );
@@ -516,9 +530,9 @@ public:
             
         }
         std::cout<<"Point array: done!"<<std::endl;
-        FKDTree<TYPE, numberOfDimensions> result(points);
+        tree.init(points);
         std::cout<<"Tree from point array: done!"<<std::endl;
-        return result;
+        //return result;
         
     }
 
