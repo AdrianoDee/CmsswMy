@@ -124,14 +124,14 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
                                                          const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree & innerTree) {
 
   HitDoubletsCA result(innerLayer,outerLayer);
-
+  std::cout<<"Results initialised : done!"<<std::endl;
   InnerDeltaPhi deltaPhi(*outerLayer.detLayer(),*innerLayer.detLayer(), reg, es);
-
+  std::cout<<"Delta phi : done!"<<std::endl;
   // std::cout << "layers " << theInnerLayer.detLayer()->seqNum()  << " " << outerLayer.detLayer()->seqNum() << std::endl;
 
   constexpr float nSigmaPhi = 3.f;
   for (int io = 0; io!=int(outerLayer.hits().size()); ++io) {
-      
+    std::cout<<"Outer hit cylce : in!("<<io<<")"<<std::endl;
     Hit const & ohit = outerLayer.hits()[io];
     auto const & gs = static_cast<BaseTrackerRecHit const &>(*ohit).globalState();
     auto loc = gs.position-reg.origin().basicVector();
@@ -144,7 +144,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     float oDrphi = gs.errorRPhi;
     float oDr = gs.errorR;
     float oDz = gs.errorZ;
-      
+    std::cout<<"Outer Hit""Parameters : done!"<<"("<<io<<")"<<std::endl;
     if (!deltaPhi.prefilter(oX,oY)) continue;
       
     PixelRecoRange<float> phiRange = deltaPhi(oX,oY,oZ,nSigmaPhi*oDrphi);
@@ -153,21 +153,24 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
     if(!checkRZ) continue;
-
+    std::cout<<"HitRZ Check : done!"<<"("<<io<<")"<<std::endl;
     Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
       
     std::vector<unsigned int> foundHitsInRange;
 
       switch (checkRZ->algo()) {
           case (HitRZCompatibility::zAlgo) :
+              std::cout<<"HitRZ Check : zAlgo!"<<"("<<io<<")"<<std::endl;
               std::get<0>(kernels).set(checkRZ);
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange);
               break;
           case (HitRZCompatibility::rAlgo) :
+              std::cout<<"HitRZ Check : rAlgo!"<<"("<<io<<")"<<std::endl;
               std::get<1>(kernels).set(checkRZ);
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange);
               break;
           case (HitRZCompatibility::etaAlgo) :
+              std::cout<<"HitRZ Check : etaAlgo CAZZO!"<<"("<<io<<")"<<std::endl;
               break;
       }
       
