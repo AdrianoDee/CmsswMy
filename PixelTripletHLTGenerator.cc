@@ -68,7 +68,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     
   std::cout<<"PixelTripletsHLT : in!"<<std::endl;
   //FeliceKDTree!
-  LayerTree* alberoFuori();
+  LayerTree* alberoFuori = nullptr;
   alberoFuori->FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
   //alberoFuori->FKDTree<float,3>::build();
   std::cout<<"Built?"<<std::endl;  
