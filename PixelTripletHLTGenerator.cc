@@ -21,6 +21,7 @@
 #include "RecoPixelVertexing/PixelTriplets/plugins/KDTreeLinkerTools.h"
 #include "RecoPixelVertexing/PixelTriplets/plugins/FKDTree.h"
 #include "RecoTracker/TkHitPairs/interface/HitDoubletsCA.h"
+#include "RecoTracker/TkHitPairs/interface/HitPairGeneratorFromLayerPairCA.h"
 
 #include "CommonTools/Utils/interface/DynArray.h"
 
