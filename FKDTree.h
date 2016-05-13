@@ -75,7 +75,7 @@ public:
         thePoints.clear();
         theIndecesToVisit.clear();
     }
-    
+    /*
     FKDTree(const FKDTree<TYPE, numberOfDimensions>& other)
     {
         theNumberOfPoints(other.theNumberOfPoints);
@@ -97,7 +97,7 @@ public:
             theDimensions = other.theDimensions;
         
     }
-    /*
+    
     FKDTree(FKDTree<TYPE, numberOfDimensions> && other)
     {
         theNumberOfPoints(std::move(other.theNumberOfPoints));
