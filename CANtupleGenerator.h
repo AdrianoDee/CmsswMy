@@ -32,7 +32,7 @@ protected:
   LayerDoubletsCache *theDoubletsCache;
     
   std::unique_ptr<HitPairGeneratorFromLayerPairCA> theDoubletsGeneratorCA;
-  const unsigned int theMaxElement;
+  //const unsigned int theMaxElement;
   
 };
 #endif
