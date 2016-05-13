@@ -502,7 +502,7 @@ public:
         
     }
     
-    void make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup, FKDTree<TYPE, numberOfDimensions>& tree)
+    void make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
         std::cout<<"Make Tree From Region Layer : in!"<<std::endl;
         static_assert( numberOfDimensions == 3, "Only for 3-dim trees!" );
@@ -530,7 +530,7 @@ public:
             
         }
         std::cout<<"Point array: done!"<<std::endl;
-        tree.init(points);
+        init(points);
         std::cout<<"Tree from point array: done!"<<std::endl;
         //return result;
         
