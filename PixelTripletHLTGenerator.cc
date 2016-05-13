@@ -69,7 +69,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   LayerTree * alberoFuori = nullptr;
   alberoFuori->FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
     
-  HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
+  HitPairGeneratorFromLayerPairCA* caDoubletsGenerator(0,1,10000);
     
   if (theComparitor) theComparitor->init(ev, es);
   
