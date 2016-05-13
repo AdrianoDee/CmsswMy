@@ -97,7 +97,7 @@ public:
             theDimensions = other.theDimensions;
         
     }
-    
+    /*
     FKDTree(FKDTree<TYPE, numberOfDimensions> && other)
     {
         theNumberOfPoints(std::move(other.theNumberOfPoints));
@@ -118,7 +118,7 @@ public:
         for (int i = 0; i < numberOfDimensions; ++i)
             theDimensions = std::move(other.theDimensions);
     }
-    
+    */
     FKDTree<TYPE, numberOfDimensions>& operator=(
                                                  FKDTree<TYPE, numberOfDimensions> && other)
     {
@@ -584,7 +584,7 @@ private:
 };
 
 /*
-#endif /* FKDTREE_FKDTREE_H_ 
+#endif  FKDTREE_FKDTREE_H_
 #ifndef FKDTREE_FKDTREE_H_
 #define FKDTREE_FKDTREE_H_
 
@@ -1232,4 +1232,5 @@ private:
  
  
 */
+
 #endif
