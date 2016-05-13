@@ -365,7 +365,7 @@ public:
             }
             
         }
-        
+        return false;
     }
     
     bool test_correct_search(const std::vector<unsigned int> foundPoints,
