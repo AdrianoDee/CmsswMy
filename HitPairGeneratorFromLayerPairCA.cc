@@ -122,7 +122,8 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
                                                          const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree & innerTree) {
-
+    
+  std::cout<<"Hit Doublets CA Generator : in!"<<std::endl;
   HitDoubletsCA result(innerLayer,outerLayer);
   std::cout<<"Results initialised : done!"<<std::endl;
   InnerDeltaPhi deltaPhi(*outerLayer.detLayer(),*innerLayer.detLayer(), reg, es);
