@@ -68,14 +68,18 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   //FeliceKDTree!
   LayerTree * alberoFuori = nullptr;
   alberoFuori->FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
-    
+  
+  std::cout<<"PixelTripletsHLT : in!"<<std::endl;
   HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
     
   if (theComparitor) theComparitor->init(ev, es);
   
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
-  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],*alberoFuori);
+  std::cout<<"Legacy Doublets : done!"<<std::endl;
   
+  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],*alberoFuori);
+  std::cout<<"CA Doublets : done!"<<std::endl;
+    
     for(int j=0;j <(int)CADoublets.size();j++){
         std::cout<<" [ "<<CADoublets.innerHitId(j) <<" - "<<CADoublets.outerHitId(j)<<" ]  ";
     }
