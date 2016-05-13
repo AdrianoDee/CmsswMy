@@ -526,6 +526,7 @@ public:
     
     FKDTree<TYPE, numberOfDimensions> make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
+        std::cout<<"Make Tree From Region Layer : in!"<<std::endl;
         static_assert( numberOfDimensions == 3, "Only for 3-dim trees!" );
         //static_assert( (typeof(TYPE) == float), "Float." );
         const float maxDelphi = region.ptMin() < 0.3f ? float(M_PI)/4.f : float(M_PI)/8.f;
@@ -542,14 +543,16 @@ public:
             auto z = gs.position.z();
             auto r = gs.r;
             
+            std::cout<<"Make Point? - Phi = "<<phi<<" Z = "<<z<<" R = "<<r<<std::endl;
             points.push_back(make_FKDPoint(phi,z,r,pointID)); pointID++;
-            
+            std::cout<<"Made!"<<std::endl;
+            std::cout<<"Point : "<<points[i][0]<<" - "<<points[i][0]<<" - "<<points[i][1]<<" - "<<points[i][2]<<std::endl;
             if (phi>safePhi) {points.push_back(make_FKDPoint(phi-Geom::ftwoPi(),z,r,pointID)); pointID++;}
             else if (phi<-safePhi) {points.push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,r,pointID));pointID++;}
             
         }
         
-        FKDTree<float, 3> result(points);
+        FKDTree<TYPE, numberOfDimensions> result(points);
         
         return result;
         
