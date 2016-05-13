@@ -70,7 +70,7 @@ namespace {
           
           auto thickness = innerLayer.detLayer()->surface().bounds().thickness();
           auto u = innerLayer.detLayer()->isBarrel() ? layerBarrelGeometry.specificSurface().radius() : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
-          std::cout<<"U & thickness : done! "<<thickness<<std::endl;
+          std::cout<<"U & thickness : done! "<<thickness<<" - "<<u<<std::endl;
           Range upperRange = checkRZ->range(u+thickness);
           Range lowerRange = checkRZ->range(u-thickness);
           std::cout<<"Ranges : done!"<<std::endl;
