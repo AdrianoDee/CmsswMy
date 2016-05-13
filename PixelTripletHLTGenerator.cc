@@ -74,7 +74,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   if (theComparitor) theComparitor->init(ev, es);
   
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
-  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
+  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],*alberoFuori);
     
   if (doublets.empty()) return;
 
