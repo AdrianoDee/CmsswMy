@@ -551,9 +551,9 @@ public:
             else if (phi<-safePhi) {points.push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,r,pointID));pointID++;}
             
         }
-        
+        std::cout<<"Point array: done!"<<std::endl;
         FKDTree<TYPE, numberOfDimensions> result(points);
-        
+        std::cout<<"Tree from point array: done!"<<std::endl;
         return result;
         
     }
