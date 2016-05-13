@@ -1,10 +1,3 @@
-/*
- * FKDTree.h
- *
- *  Created on: Jan 28, 2016
- *      Author: fpantale
- */
-
 #ifndef FKDTREE_FKDTREE_H_
 #define FKDTREE_FKDTREE_H_
 
@@ -18,11 +11,10 @@
 #include <deque>
 #include "FKDPoint.h"
 #include "FQueue.h"
-#include "DataFormats/GeometryVector/interface/Pi.h"
-#include "DataFormats/TrackerRecHit2D/interface/BaseTrackerRecHit.h"
-#include "TrackingTools/DetLayers/interface/DetLayer.h"
 
-typedef BaseTrackerRecHit const * Hit;
+
+#define FLOOR_LOG2(X) ((unsigned int) (31 - __builtin_clz(X | 1)))
+
 
 template<class TYPE, int numberOfDimensions>
 class FKDTree
@@ -56,7 +48,7 @@ public:
     FKDTree(const std::vector<FKDPoint<TYPE, numberOfDimensions> >& points)
     {
         theNumberOfPoints = points.size();
-        theDepth = std::floor(log2(theNumberOfPoints));
+        theDepth = FLOOR_LOG2(theNumberOfPoints);
         for (auto& x : theDimensions)
             x.resize(theNumberOfPoints);
         theIntervalLength.resize(theNumberOfPoints, 0);
@@ -103,8 +95,8 @@ public:
     
     FKDTree(FKDTree<TYPE, numberOfDimensions> && other)
     {
-        theNumberOfPoints = std::move(other.theNumberOfPoints);
-        theDepth = std::move(other.theDepth);
+        theNumberOfPoints(std::move(other.theNumberOfPoints));
+        theDepth(std::move(other.theDepth));
         
         theIntervalLength.clear();
         theIntervalMin.clear();
@@ -121,7 +113,6 @@ public:
         for (int i = 0; i < numberOfDimensions; ++i)
             theDimensions = std::move(other.theDimensions);
     }
-    
     
     FKDTree<TYPE, numberOfDimensions>& operator=(
                                                  FKDTree<TYPE, numberOfDimensions> && other)
@@ -154,7 +145,7 @@ public:
     void resize(unsigned int nPoints)
     {
         theNumberOfPoints = nPoints;
-        theDepth = std::floor(log2(nPoints));
+        theDepth = FLOOR_LOG2(nPoints);
         for (auto& x : theDimensions)
             x.resize(theNumberOfPoints);
         theIntervalLength.resize(theNumberOfPoints, 0);
@@ -254,7 +245,7 @@ public:
                                                dimension);
                 
                 if (intersection && is_in_the_box(index, minPoint, maxPoint))
-                    foundPoints.emplace_back(theIds[index]);
+                    foundPoints.emplace_back(theIds.at(index));
                 
                 bool isLowerThanBoxMin = theDimensions[dimension][index]
                 < minPoint[dimension];
@@ -294,7 +285,7 @@ public:
         {
             if(is_in_the_box(index, minPoint, maxPoint))
             {
-                foundPoints.emplace_back(theIds[index]);
+                foundPoints.emplace_back(theIds.at(index));
             }
             numberOfSonsToVisitNext = maxNumberOfSonsToVisitNext;
         }
@@ -355,7 +346,7 @@ public:
             }
             
         }
-        return false;
+        
     }
     
     bool test_correct_search(const std::vector<unsigned int> foundPoints,
@@ -416,7 +407,7 @@ public:
     }
     void build()
     {
-        theDepth = std::floor(log2(theNumberOfPoints));
+        theDepth = FLOOR_LOG2(theNumberOfPoints);
         for (auto& x : theDimensions)
             x.resize(theNumberOfPoints);
         theIntervalLength.resize(theNumberOfPoints, 0);
@@ -492,38 +483,6 @@ public:
         
     }
     
-    
-    
-  /*  FKDTree<float, 3> make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
-    {
-        //static_assert( numberOfDimensions == 3, "Only for 3-dim trees!" );
-        //static_assert( (typeof(TYPE) == float), "Float." );
-        const float maxDelphi = region.ptMin() < 0.3f ? float(M_PI)/4.f : float(M_PI)/8.f;
-        const float safePhi = M_PI-maxDelphi;
-        
-        std::vector<Hit> hits = region.hits(iEvent,iSetup,layer);
-        
-        FKDTree<float, 3> result(hits.size());
-        
-        unsigned int pointID = 0;
-        for (int i = 0; i!=(int)hits.size(); i++) {
-            Hit const & hit = hits[i]->hit();
-            auto const & gs = hit->globalState();
-            auto phi = gs.position.barePhi();
-            auto z = gs.position.z();
-            auto r = gs.r;
-            
-            result.FKDTree<float, 3>::push_back(make_FKDPoint(phi,z,r,pointID)); pointID++;
-            
-            if (phi>safePhi) {result.FKDTree<float, 3>::push_back(make_FKDPoint(phi-Geom::ftwoPi(),z,r,pointID)); pointID++;}
-            else if (phi<-safePhi) {result.FKDTree<float, 3>::push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,r,pointID));pointID++;}
-            
-        }
-        
-        return result;
-        
-    }*/
-    
     FKDTree<TYPE, numberOfDimensions> make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
         std::cout<<"Make Tree From Region Layer : in!"<<std::endl;
@@ -558,16 +517,13 @@ public:
         
     }
     
-
-    
-    
 private:
     
     unsigned int partition_complete_kdtree(unsigned int length)
     {
         if (length == 1)
             return 0;
-        unsigned int index = 1 << ((int) log2(length));
+        unsigned int index = 1 << (FLOOR_LOG2(length));
         
         if ((index / 2) - 1 <= length - index)
             return index - 1;
@@ -621,33 +577,4 @@ private:
     
 };
 
-/*
- #ifndef FKDTREE_H_
- #define FKDTREE_H_
- #include <array>
- #include <utility>
- 
- template <int numberOfDimensions>
- struct KDRange
- {
- 
-	using 1DRange = std::pair<float, float>;
-	std::array<1DRange, numberOfDimensions> theKDRange;
- 
- public:
- 
- KDTreeBox(float d1min, float d1max,
- float d2min, float d2max)
- : dim1min (d1min), dim1max(d1max)
- , dim2min (d2min), dim2max(d2max)
- {}
- 
- KDTreeBox()
- : dim1min (0), dim1max(0)
- , dim2min (0), dim2max(0)
- {}
- };
- 
-  */
-
-#endif
+#endif /* FKDTREE_FKDTREE_H_ */
