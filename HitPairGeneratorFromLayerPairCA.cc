@@ -53,6 +53,8 @@ namespace {
           
           const BarrelDetLayer& layerBarrelGeometry = static_cast<const BarrelDetLayer&>(*innerLayer.detLayer());
           
+          std::cout<<"BarrelDet : done!"<<std::endl;
+          
           float vErr = 0.0;
           
           for(auto hit : innerLayer.hits()){
@@ -61,15 +63,18 @@ namespace {
               auto max = std::max(vErr,dv);
               vErr = max;
           }
-          
+          std::cout<<"vErrMax : calculated!"<<std::endl;
           vErr *= nSigmaRZ;
           
           float rmax,rmin,zmax,zmin;
           
           auto thickness = innerLayer.detLayer()->surface().bounds().thickness();
           auto u = innerLayer.detLayer()->isBarrel() ? layerBarrelGeometry.specificSurface().radius() : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
+          std::cout<<"U & thickness : done!"<<std::endl;
           Range upperRange = checkRZ->range(u+thickness);
           Range lowerRange = checkRZ->range(u-thickness);
+          
+          std::cout<<"Ranges : done!"<<std::endl;
           
           if(innerLayer.detLayer()->isBarrel()){
               
@@ -87,10 +92,16 @@ namespace {
               
           }
           
+          std::cout<<"Rs & Zs : done!"<<std::endl;
+          
           LayerPoint minPoint(phiRange.min(),zmin,rmin,1000);
+          std::cout<<"LayerPoint Min : done!"<<std::endl;
           LayerPoint maxPoint(phiRange.max(),zmax,rmax,1001);
+          std::cout<<"LayerPoint Max : done!"<<std::endl;
           
           innerTree.LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
+          
+          std::cout<<"FKDTree Search : done!"<<std::endl;
           
       }
     
