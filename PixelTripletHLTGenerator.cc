@@ -68,11 +68,11 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     
   std::cout<<"PixelTripletsHLT : in!"<<std::endl;
   //FeliceKDTree!
-  LayerTree* alberoFuori = nullptr;
-  alberoFuori->FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
+  LayerTree alberoFuori;
+  alberoFuori.FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
   //alberoFuori->FKDTree<float,3>::build();
   std::cout<<"Built?"<<std::endl;  
-  bool corretto = alberoFuori->FKDTree<float,3>::test_correct_build();
+  bool corretto = alberoFuori.FKDTree<float,3>::test_correct_build();
   if(corretto) std::cout<<"Tree Correctly Built"<<std::endl;
   HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
     
@@ -81,7 +81,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
   std::cout<<"Legacy Doublets : done!"<<std::endl;
   
-  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],*alberoFuori);
+  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
   std::cout<<"CA Doublets : done!"<<std::endl;
     
     for(int j=0;j <(int)CADoublets.size();j++){
