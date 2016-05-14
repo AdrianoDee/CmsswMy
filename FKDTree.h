@@ -263,8 +263,10 @@ public:
                 bool intersection = intersects(index, minPoint, maxPoint,
                                                dimension);
                 
-                if (intersection && is_in_the_box(index, minPoint, maxPoint))
+                if (intersection && is_in_the_box(index, minPoint, maxPoint)){
                     foundPoints.emplace_back(theIds.at(index));
+                    std::cout<<"Point emplaced back : "<<index<<std::endl;
+                }
                 
                 bool isLowerThanBoxMin = theDimensions[dimension][index]
                 < minPoint[dimension];

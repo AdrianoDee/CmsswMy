@@ -99,9 +99,9 @@ namespace {
           std::cout<<"z min : "<<zmin<<std::endl;
           std::cout<<"z max : "<<zmax<<std::endl;
           
-          LayerPoint minPoint(phiRange.min(),zmin,rmin,1000);
+          LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
           std::cout<<"LayerPoint Min : done!"<<std::endl;
-          LayerPoint maxPoint(phiRange.max(),zmax,rmax,1001);
+          LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           std::cout<<"LayerPoint Max : done!"<<std::endl;
           
           innerTree.LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
@@ -188,7 +188,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
               std::cout<<"HitRZ Check : etaAlgo CAZZO!"<<"("<<io<<")"<<std::endl;
               break;
       }
-      
+      std::cout<<"Found hits : "<<foundHitsInRange.size()<<" ("<<io<<")"<<std::endl;
       for (auto i=0; i!=(int)foundHitsInRange.size(); ++i) {
 
           if (theMaxElement!=0 && result.size() >= theMaxElement){
