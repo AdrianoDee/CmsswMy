@@ -92,6 +92,12 @@ namespace {
           }
           
           std::cout<<"Rs & Zs : done!"<<std::endl;
+          std::cout<<"Phi min : "<<phiRange.min()<<std::endl;
+          std::cout<<"Phi max : "<<phiRange.max()<<std::endl;
+          std::cout<<"r min : "<<rmin<<std::endl;
+          std::cout<<"r max : "<<rmax<<std::endl;
+          std::cout<<"z min : "<<zmin<<std::endl;
+          std::cout<<"z max : "<<zmax<<std::endl;
           
           LayerPoint minPoint(phiRange.min(),zmin,rmin,1000);
           std::cout<<"LayerPoint Min : done!"<<std::endl;
