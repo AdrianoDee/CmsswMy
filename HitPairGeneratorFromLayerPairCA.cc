@@ -35,35 +35,6 @@ namespace {
 
 HitPairGeneratorFromLayerPairCA::~HitPairGeneratorFromLayerPairCA() {}
 
-namespace {
-    
-    template<typename Algo>
-    struct Kernel {
-        using  Base = HitRZCompatibility;
-        void set(Base const * a) {
-            assert( a->algo()==Algo::me);
-            checkRZ=reinterpret_cast<Algo const *>(a);
-        }
-        
-        void operator()(int b, int e, const RecHitsSortedInPhi & innerHitsMap, bool * ok) const {
-            constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
-            for (int i=b; i!=e; ++i) {
-                Range allowed = checkRZ->range(innerHitsMap.u[i]);
-                float vErr = nSigmaRZ * innerHitsMap.dv[i];
-                Range hitRZ(innerHitsMap.v[i]-vErr, innerHitsMap.v[i]+vErr);
-                Range crossRange = allowed.intersection(hitRZ);
-                ok[i-b] = ! crossRange.empty() ;
-            }
-        }
-        Algo const * checkRZ;
-        
-    };
-    
-    
-    template<typename ... Args> using Kernels = std::tuple<Kernel<Args>...>;
-    
-}
-
 // devirtualizer
 #include<tuple>
 namespace {
