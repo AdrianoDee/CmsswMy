@@ -85,7 +85,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
     }
     
-  std::cout<<"---------------------------------------------------------------------"<<std::endl;
+    printf("\n");
   
   auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
   std::cout<<"CA Doublets : done!"<<std::endl;
