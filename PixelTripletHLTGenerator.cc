@@ -80,15 +80,18 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
   std::cout<<"Legacy Doublets : done!"<<std::endl;
+    
+    for(int j=0;j <(int)doublets.size();j++){
+        std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
+    }
+    
+    std::cout<<std::endl;
   
   auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
   std::cout<<"CA Doublets : done!"<<std::endl;
     
     for(int j=0;j <(int)CADoublets.size();j++){
         std::cout<<" [ "<<CADoublets.innerHitId(j) <<" - "<<CADoublets.outerHitId(j)<<" ]  ";
-    }
-    for(int j=0;j <(int)doublets.size();j++){
-        std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
     }
   
   if (doublets.empty()) return;
