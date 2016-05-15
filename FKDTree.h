@@ -246,6 +246,7 @@ public:
                            const FKDPoint<TYPE, numberOfDimensions>& maxPoint,
                            std::vector<unsigned int>& foundPoints)
     {
+        std::cout<<" FKDTree "<<std::endl;
         theIndecesToVisit.clear();
         theIndecesToVisit.push_back(0);
         for (int depth = 0; depth < theDepth + 1; ++depth)
@@ -435,7 +436,7 @@ public:
         theIntervalMin.resize(theNumberOfPoints, 0);
         theIds.resize(theNumberOfPoints);
         thePoints.reserve(theNumberOfPoints);
-        
+        std::cout<<"The number of points back : "<<theNumberOfPoints<<std::endl;
         //gather kdtree building
         int dimension;
         theIntervalMin[0] = 0;
