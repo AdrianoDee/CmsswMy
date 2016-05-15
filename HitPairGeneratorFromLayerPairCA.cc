@@ -152,9 +152,9 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 	if(innerLayer.detLayer()->isBarrel()){
 		Hit const & ihit = outerLayer.hits()[0];
 		auto const & gsIn = static_cast<BaseTrackerRecHit const &>(*ihit).globalState();
-		auto locIn = gs.position-reg.origin().basicVector();
+		auto locIn = gsIn.position-reg.origin().basicVector();
 
-		uOfLayer = loc.perp();
+		uOfLayer = locIn.perp();
 		
 	}
 	
