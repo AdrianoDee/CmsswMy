@@ -201,7 +201,8 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 
 			  auto uInner = innerLayer.detLayer()->isBarrel() ? locInner.perp() : gs.position.z();
 			  
-			  Range bufferrange = checkRZ->Range(uInner);
+			  Range bufferrange = checkRZ->range(uInner);
+			  
 			  upperLimit = std::max(bufferrange.min(),upperLimit);
 			  upperLimit = std::max(bufferrange.max(),upperLimit);
 			  
