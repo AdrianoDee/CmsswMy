@@ -181,7 +181,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange);
               break;
           case (HitRZCompatibility::rAlgo) :
-              std::cout<<"  -  HitRZ Check : rAlgo!"<<"("<<io<<")  "
+              std::cout<<"  -  HitRZ Check : rAlgo!"<<"("<<io<<")  ";
               std::get<1>(kernels).set(checkRZ);
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange);
               break;
