@@ -153,16 +153,9 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
   InnerDeltaPhi deltaPhi(*outerLayer.detLayer(),*innerLayer.detLayer(), reg, es);
   //std::cout<<"Delta phi : done!"<<std::endl;
   // std::cout << "layers " << theInnerLayer.detLayer()->seqNum()  << " " << outerLayer.detLayer()->seqNum() << std::endl;
-  float uOfLayer = 0.0;
-	
-	if(innerLayer.detLayer()->isBarrel()){
-		Hit const & ihit = outerLayer.hits()[0];
-		auto const & gsIn = static_cast<BaseTrackerRecHit const &>(*ihit).globalState();
-		auto locIn = gsIn.position-reg.origin().basicVector();
-
-		uOfLayer = locIn.perp();
-		
-	}
+  bool rangesDone = false;
+  float upperLimit = -10000;
+  float lowerLimit = 10000;
 	
   constexpr float nSigmaPhi = 3.f;
   for (int io = 0; io!=int(outerLayer.hits().size()); ++io) {
@@ -185,12 +178,34 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     PixelRecoRange<float> phiRange = deltaPhi(oX,oY,oZ,nSigmaPhi*oDrphi);
 
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
+
     if(!checkRZ) continue;
+	 
+	  if(!rangesDone){
+		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
+			  
+			  auto const & gsInner = static_cast<BaseTrackerRecHit const &>(h).globalState();
+			  auto locInner = gsInner.position-origin.basicVector();
+
+			  auto uInner = iinnerLayer.detLayer()->isBarrel() ? locInner.perp() : gs.position.z();
+			  
+			  Range bufferrange = checkRZ->Range(uInner);
+			  upperLimit = std::max(bufferrange.min(),upperLimit);
+			  upperLimit = std::max(bufferrange.max(),upperLimit);
+			  
+			  lowerLimit = std::min(bufferrange.max(),lowerLimit);
+			  lowerLimit = std::min(bufferrange.min(),lowerLimit);
+			  
+			  
+		  }
+		  
+		}
     std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
     Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
       
     std::vector<unsigned int> foundHitsInRange;
-
+	
+	  
       switch (checkRZ->algo()) {
           case (HitRZCompatibility::zAlgo) :
               std::cout<<" -  HitRZ Check : zAlgo!"<<"("<<io<<")  ";
