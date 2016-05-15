@@ -47,13 +47,13 @@ namespace {
       checkRZ=reinterpret_cast<Algo const *>(a);
     }
     
-      void operator()(LayerTree& innerTree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits) const {
+      void operator()(LayerTree& innerTree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,float uLayer) const {
           
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
           
-          const BarrelDetLayer& layerBarrelGeometry = static_cast<const BarrelDetLayer&>(*innerLayer.detLayer());
+          //const BarrelDetLayer& layerBarrelGeometry = static_cast<const BarrelDetLayer&>(*innerLayer.detLayer());
           
-          std::cout<<"BarrelDet : done!"<<std::endl;
+          //std::cout<<"BarrelDet : done!"<<std::endl;
           
           float vErr = 0.0;
           
@@ -69,7 +69,8 @@ namespace {
           float rmax,rmin,zmax,zmin;
           
           auto thickness = innerLayer.detLayer()->surface().bounds().thickness();
-          auto u = innerLayer.detLayer()->isBarrel() ? layerBarrelGeometry.specificSurface().radius() : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
+          auto u = innerLayer.detLayer()->isBarrel() ? innerLayer.detLayer()->position().r() : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
+		  thickness *= (u)/(std::fabs(u));
           std::cout<<"U & thickness : done! "<<thickness<<" - "<<u<<std::endl;
           Range upperRange = checkRZ->range(u+thickness);
           Range lowerRange = checkRZ->range(u-thickness);
@@ -146,7 +147,10 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
   InnerDeltaPhi deltaPhi(*outerLayer.detLayer(),*innerLayer.detLayer(), reg, es);
   //std::cout<<"Delta phi : done!"<<std::endl;
   // std::cout << "layers " << theInnerLayer.detLayer()->seqNum()  << " " << outerLayer.detLayer()->seqNum() << std::endl;
-
+  float uOfLayer = 0.0;
+	
+  if(
+	
   constexpr float nSigmaPhi = 3.f;
   for (int io = 0; io!=int(outerLayer.hits().size()); ++io) {
     std::cout<<"  Outer hit cylce : in!("<<io<<")"<<std::endl;
