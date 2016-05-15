@@ -196,7 +196,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
 			  
 			  Hit const & ihit = innerLayer.hits()[io];
-			  auto const & gsInner = static_cast<BaseTrackerRecHit const &>(ihit).globalState();
+			  auto const & gsInner = static_cast<BaseTrackerRecHit const &>(*ihit).globalState();
 			  auto locInner = gsInner.position-origin.basicVector();
 
 			  auto uInner = innerLayer.detLayer()->isBarrel() ? locInner.perp() : gs.position.z();
