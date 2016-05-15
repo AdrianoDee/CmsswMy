@@ -248,7 +248,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
           }
           result.add(foundHitsInRange[i],io);
       }
-      delete checkRZ;
+      delete checkRZ; std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  ";
   
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
