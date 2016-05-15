@@ -69,7 +69,7 @@ namespace {
           float rmax,rmin,zmax,zmin;
           
           auto thickness = innerLayer.detLayer()->surface().bounds().thickness();
-          auto u = innerLayer.detLayer()->isBarrel() ? innerLayer.detLayer()->position().r() : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
+          auto u = innerLayer.detLayer()->isBarrel() ? uLayer : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
 		  thickness *= (u)/(std::fabs(u));
           std::cout<<"U & thickness : done! "<<thickness<<" - "<<u<<std::endl;
           Range upperRange = checkRZ->range(u+thickness);
@@ -149,7 +149,14 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
   // std::cout << "layers " << theInnerLayer.detLayer()->seqNum()  << " " << outerLayer.detLayer()->seqNum() << std::endl;
   float uOfLayer = 0.0;
 	
-  if(
+	if(innerLayer.detLayer()->isBarrel()){
+		Hit const & ihit = outerLayer.hits()[0];
+		auto const & gsIn = static_cast<BaseTrackerRecHit const &>(*ihit).globalState();
+		auto locIn = gs.position-reg.origin().basicVector();
+
+		uOfLayer = loc.perp();
+		
+	}
 	
   constexpr float nSigmaPhi = 3.f;
   for (int io = 0; io!=int(outerLayer.hits().size()); ++io) {
@@ -182,12 +189,12 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
           case (HitRZCompatibility::zAlgo) :
               std::cout<<" -  HitRZ Check : zAlgo!"<<"("<<io<<")  ";
               std::get<0>(kernels).set(checkRZ);
-              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange);
+              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,uOfLayer);
               break;
           case (HitRZCompatibility::rAlgo) :
               std::cout<<"  -  HitRZ Check : rAlgo!"<<"("<<io<<")  ";
               std::get<1>(kernels).set(checkRZ);
-              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange);
+              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,uOfLayer);
               break;
           case (HitRZCompatibility::etaAlgo) :
               //std::cout<<"HitRZ Check : etaAlgo CAZZO!"<<"("<<io<<")"<<std::endl;
