@@ -79,15 +79,15 @@ namespace {
               
               zmax = std::max(upperRange.max(),lowerRange.max());
               zmin = -std::max(-upperRange.min(),-lowerRange.min());
-              rmax = u+thickness+vErr;
-              rmin = u-thickness-vErr;
+			  rmax = 1000;//+(u+thickness+vErr;
+			  rmin = -1000;//u-thickness-vErr;
               
           }else{
              
               rmax = std::max(upperRange.max(),lowerRange.max());
               rmin = -std::max(-upperRange.min(),-lowerRange.min());
-              zmin = u+thickness+vErr;
-              zmax = u-thickness-vErr;
+			  zmin = -1000;//u+thickness+vErr;
+			  zmax = 1000;//u-thickness-vErr;
               
           }
           
@@ -99,10 +99,10 @@ namespace {
           std::cout<<"z min : "<<zmin<<std::endl;
           std::cout<<"z max : "<<zmax<<std::endl;
           
-          //LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
-          LayerPoint minPoint(-10000,-10000,-10000,0);
+          LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
+          //LayerPoint minPoint(-10000,-10000,-10000,0);
           std::cout<<"LayerPoint Min : done!"<<std::endl;
-          LayerPoint maxPoint(10000,10000,10000,100000);
+          LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           std::cout<<"LayerPoint Max : done!"<<std::endl;
           
           innerTree.LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
