@@ -78,6 +78,11 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     
   if (theComparitor) theComparitor->init(ev, es);
   
+  std::cout<<"INNER LAYER :  " <<pairLayers[0].name()<<std::endl;
+  std::cout<<"Thickness :  " <<pairLayers[0].detLayer()->surface().bounds().thickness();<<std::endl;
+  std::cout<<"---------------------------------------"<<std::endl;
+  std::cout<<"OUTER LAYER :  " <<pairLayers[1].name()<<std::endl;
+  std::cout<<"Thickness :  " <<pairLayers[1].detLayer()->surface().bounds().thickness();<<std::endl;
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
   std::cout<<"Legacy Doublets : done!"<<std::endl;
   std::cout<<doublets.size()<<" doublets found!"<<std::endl;
@@ -87,7 +92,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     
     printf("\n");
   
-  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
+  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori;
   std::cout<<"CA Doublets : done!"<<std::endl;
   std::cout<<CADoublets.size()<<" CA doublets found!"<<std::endl;
     for(int j=0;j <(int)CADoublets.size();j++){
