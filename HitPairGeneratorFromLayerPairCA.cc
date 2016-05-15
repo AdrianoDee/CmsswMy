@@ -47,8 +47,8 @@ namespace {
       checkRZ=reinterpret_cast<Algo const *>(a);
     }
     
-      void operator()(LayerTree& innerTree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,float uLayer) const {
-          
+      void operator()(LayerTree& innerTree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
+          /*
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
           
           //const BarrelDetLayer& layerBarrelGeometry = static_cast<const BarrelDetLayer&>(*innerLayer.detLayer());
@@ -65,9 +65,9 @@ namespace {
           }
           std::cout<<"vErrMax : calculated!"<<std::endl;
           vErr *= nSigmaRZ;
-          
+          */
           float rmax,rmin,zmax,zmin;
-          
+          /*
           auto thickness = innerLayer.detLayer()->surface().bounds().thickness();
           auto u = innerLayer.detLayer()->isBarrel() ? uLayer : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
 		  thickness *= (u)/(std::fabs(u));
@@ -81,23 +81,33 @@ namespace {
 		  std::cout<<"Upper at "<<u-thickness<<std::endl;
 		  std::cout<<upperRange.min()<<" - "<<upperRange.max()<<std::endl;
           std::cout<<"Ranges : done!"<<std::endl;
-          
+          */
           if(innerLayer.detLayer()->isBarrel()){
-              
+              /*
               zmax = std::max(upperRange.max(),lowerRange.max());
               zmin = -std::max(-upperRange.min(),-lowerRange.min());
 			  rmax = 1000;//+(u+thickness+vErr;
+			  rmin = -1000;//u-thickness-vErr;*/
+			  
+			  zmax = searchRange.max();
+			  zmin = searchRange.min();
+			  rmax = 1000;//+(u+thickness+vErr;
 			  rmin = -1000;//u-thickness-vErr;
-              
+			  
           }else{
-             
+              /*
               rmax = std::max(upperRange.max(),lowerRange.max());
               rmin = -std::max(-upperRange.min(),-lowerRange.min());
 			  zmin = -1000;//u+thickness+vErr;
+			  zmax = 1000;//u-thickness-vErr;*/
+			  
+			  rmax = searchRange.max();
+			  rmin = searchRange.min();
+			  zmin = -1000;//u+thickness+vErr;
 			  zmax = 1000;//u-thickness-vErr;
-              
+			  
           }
-          
+		   
           std::cout<<"Rs & Zs : done!"<<std::endl;
           std::cout<<"Phi min : "<<phiRange.min()<<std::endl;
           std::cout<<"Phi max : "<<phiRange.max()<<std::endl;
@@ -105,7 +115,8 @@ namespace {
           std::cout<<"r max : "<<rmax<<std::endl;
           std::cout<<"z min : "<<zmin<<std::endl;
           std::cout<<"z max : "<<zmax<<std::endl;
-          
+		   
+		  
           LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
           //LayerPoint minPoint(-10000,-10000,-10000,0);
           std::cout<<"LayerPoint Min : done!"<<std::endl;
@@ -196,10 +207,12 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 			  lowerLimit = std::min(bufferrange.max(),lowerLimit);
 			  lowerLimit = std::min(bufferrange.min(),lowerLimit);
 			  
-			  
 		  }
 		  
 		}
+	
+	Range rangeSearch(lowerLimit,upperLimit);
+	  
     std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
     Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
       
@@ -210,12 +223,12 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
           case (HitRZCompatibility::zAlgo) :
               std::cout<<" -  HitRZ Check : zAlgo!"<<"("<<io<<")  ";
               std::get<0>(kernels).set(checkRZ);
-              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,uOfLayer);
+              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,rangeSearch);
               break;
           case (HitRZCompatibility::rAlgo) :
               std::cout<<"  -  HitRZ Check : rAlgo!"<<"("<<io<<")  ";
               std::get<1>(kernels).set(checkRZ);
-              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,uOfLayer);
+              std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,rangeSearch);
               break;
           case (HitRZCompatibility::etaAlgo) :
               //std::cout<<"HitRZ Check : etaAlgo CAZZO!"<<"("<<io<<")"<<std::endl;
