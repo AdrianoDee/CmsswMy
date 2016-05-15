@@ -216,7 +216,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 	
 	Range rangeSearch(lowerLimit,upperLimit);
     std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
-    //Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
+    Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
       
     std::vector<unsigned int> foundHitsInRange;
 	
