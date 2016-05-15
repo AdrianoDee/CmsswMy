@@ -9,6 +9,7 @@ theDoubletsCache(nullptr)
 CANtupleGenerator::~CANtupleGenerator() {}
 
 void CANtupleGenerator::init(std::unique_ptr<HitPairGeneratorFromLayerPairCA>&& doubletsGenerator,LayerFKDTreeCache *kdTReeCache,LayerDoubletsCache *doubletsCache) {
+    std::cout<<"CANtupleGenerator : in!"<<std::endl;
     theDoubletsGeneratorCA =  std::move(doubletsGenerator);
     theKDTreeCache = kdTReeCache;
     theDoubletsCache = doubletsCache;

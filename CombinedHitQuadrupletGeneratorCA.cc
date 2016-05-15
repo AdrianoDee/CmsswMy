@@ -29,6 +29,7 @@ void CombinedHitQuadrupletGeneratorCA::hitQuadruplets(
                                                     const TrackingRegion& region, OrderedHitSeeds & result,
                                                     const edm::Event& ev, const edm::EventSetup& es)
 {
+    std::cout<<"CombinedHitQuadrupletGeneratorCA : in!"<<std::endl;
     edm::Handle<SeedingLayerSetsHits> hlayers;
     ev.getByToken(theSeedingLayerToken, hlayers);
     const SeedingLayerSetsHits& layers = *hlayers;

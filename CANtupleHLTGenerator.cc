@@ -59,6 +59,7 @@ void CANtupleHLTGenerator::getNTuplets(const TrackingRegion& region,
                                           SeedingLayerSetsHits::SeedingLayerSet fourLayers
                                           )
 {
+    std::cout<<"CANtupleHLTGenerator : in!"<<std::endl;
     if (theComparitor) theComparitor->init(ev, es);
     
     std::vector<FKDTree<float,3>* > layersHitsTree;
