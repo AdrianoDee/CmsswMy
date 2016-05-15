@@ -189,7 +189,6 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     PixelRecoRange<float> phiRange = deltaPhi(oX,oY,oZ,nSigmaPhi*oDrphi);
 
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
-
     if(!checkRZ) continue;
 	 
 	  if(!rangesDone){
@@ -212,11 +211,12 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 		  }
 		  
 		}
+	  
+	delete checkRZ;
 	
 	Range rangeSearch(lowerLimit,upperLimit);
-	  
     std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
-    Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
+    //Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
       
     std::vector<unsigned int> foundHitsInRange;
 	
@@ -224,12 +224,12 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
       switch (checkRZ->algo()) {
           case (HitRZCompatibility::zAlgo) :
               std::cout<<" -  HitRZ Check : zAlgo!"<<"("<<io<<")  ";
-              std::get<0>(kernels).set(checkRZ);
+              //std::get<0>(kernels).set(checkRZ);
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,rangeSearch);
               break;
           case (HitRZCompatibility::rAlgo) :
               std::cout<<"  -  HitRZ Check : rAlgo!"<<"("<<io<<")  ";
-              std::get<1>(kernels).set(checkRZ);
+              //std::get<1>(kernels).set(checkRZ);
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,rangeSearch);
               break;
           case (HitRZCompatibility::etaAlgo) :
@@ -248,7 +248,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
           }
           result.add(foundHitsInRange[i],io);
       }
-      delete checkRZ;
+      //delete checkRZ;
   
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
