@@ -92,7 +92,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     
     printf("\n");
   
-  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori9;
+  auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
   std::cout<<"CA Doublets : done!"<<std::endl;
   std::cout<<CADoublets.size()<<" CA doublets found!"<<std::endl;
     for(int j=0;j <(int)CADoublets.size();j++){
