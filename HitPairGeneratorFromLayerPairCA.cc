@@ -190,6 +190,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
     if(!checkRZ) continue;
+	  
 	 
 	  if(!rangesDone){
 		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
@@ -209,6 +210,8 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 			  lowerLimit = std::min(bufferrange.min(),lowerLimit);
 			  
 		  }
+		  
+		  rangesDone = true;
 		  
 		}
 	  
@@ -248,7 +251,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
           }
           result.add(foundHitsInRange[i],io);
       }
-      delete checkRZ; std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  ";
+	  delete checkRZ; std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  "<<std::endl;
   
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
