@@ -263,9 +263,9 @@ void PixelQuadrupletGenerator::hitQuadruplets(const TrackingRegion& region, Orde
 }
 
 
-void PixelQuadrupletGenerator::hitQuadruplets(const TrackingRegion& region, OrderedHitSeeds& result,
+void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, OrderedHitSeeds& result,
                                               const edm::Event& ev, const edm::EventSetup& es,
-                                              const SeedingLayerSetsHits::SeedingLayerSet fourLayers)
+                                              const SeedingLayerSetsHits::SeedingLayerSet& fourLayers)
 {
     std::cout<<"PixelQuadruplets CA : in!"<<std::endl;
     if (theComparitor) theComparitor->init(ev, es);
