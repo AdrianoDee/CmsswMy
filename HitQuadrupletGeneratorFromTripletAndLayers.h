@@ -36,7 +36,7 @@ public:
 
   virtual void hitQuadruplets( const TrackingRegion& region, OrderedHitSeeds& result,
                                 const edm::Event& ev, const edm::EventSetup& es,
-                                const SeedingLayerSetsHits::SeedingLayerSet fourLayers) = 0;
+                                const SeedingLayerSetsHits::SeedingLayerSet& fourLayers) = 0;
     
 
 protected:
