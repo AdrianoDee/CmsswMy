@@ -48,8 +48,12 @@ void CombinedHitQuadrupletGenerator::hitQuadruplets(
   std::vector<LayerQuadruplets::LayerSetAndLayers> quadlayers = LayerQuadruplets::layers(layers);
   for(const auto& tripletAndLayers: quadlayers) {
       theGenerator->hitQuadruplets(region, result, ev, es, tripletAndLayers.first, tripletAndLayers.second);
-      theGenerator->hitQuadruplets(region, resultCA, ev, es,layers);
   }
+  
+  for(int j=0; j<(int)layers.size();j++) { {
+        theGenerator->hitQuadruplets(region, resultCA, ev, es,layers[j]);
+    }
+    
   theLayerCache.clear();
   theKDTreeCache.clear();
   theDoubletsCache.clear();
