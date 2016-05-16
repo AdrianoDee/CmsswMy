@@ -284,7 +284,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     {
         LayerTree alberoBuffer;
         alberoBuffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,ev,es);
-        layersHitsTree.push_back((alberoBuffer));
+        layersHitsTree.push_back(alberoBuffer);
     }
     
     for (int j=0;j<(int)layersHitsTree.size()-1;j++)
