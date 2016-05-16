@@ -286,11 +286,6 @@ void PixelQuadrupletGenerator::hitQuadruplets(const TrackingRegion& region, Orde
         layersHitsTree.push_back(&(*theKDTreeCache)(layer,region,ev,es));
     }
     
-    for (int j=0;j<(int)layersHitsTree.size();j++)
-    {
-        layersHitsTree[j]->FKDTree<float,3>::build();
-    }
-    
     for (int j=0;j<(int)layersHitsTree.size()-1;j++)
     {
         layersDoublets.push_back(&(*theDoubletsCache)(fourLayers[j],fourLayers[j+1],(*layersHitsTree[j]),region,ev,es)); //Passa vector
