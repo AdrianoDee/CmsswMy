@@ -274,7 +274,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     
     std::vector<FKDTree<float,3>* > layersHitsTree;
     std::vector<std::vector<FKDTree<float,3>*> > layersHitsTreePairs;
-    std::vector<const HitDoubletsCA*> layersDoublets;
+    std::vector<HitDoubletsCA*> layersDoublets;
     
     std::vector<std::vector<CACell>* > foundCellsPerLayer;
     //std::vector<CACell::CAntuplet> foundQuadruplets;
