@@ -276,7 +276,6 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::vector<std::vector<FKDTree<float,3>*> > layersHitsTreePairs;
     std::vector<HitDoubletsCA*> layersDoublets;
     
-    std::vector<std::vector<CACell>* > foundCellsPerLayer;
     //std::vector<CACell::CAntuplet> foundQuadruplets;
     std::vector<unsigned int> indexOfFirstCellOfLayer;
     std::vector<unsigned int> numberOfCellsPerLayer;
@@ -291,7 +290,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     for (int j=0;j<(int)layersHitsTree.size()-1;j++)
     {
 
-        layersDoublets.push_back(&(caDoubletsGenerator.doublets(region,ev,es,fourLayers[j],fourLayers[j+1],*layersHitsTree[j])));
+        auto const & CADoubletsBuffer = caDoubletsGenerator.doublets(region,ev,es,fourLayers[j],fourLayers[j+1],*layersHitsTree[j]));
+        layersDoublets.push_back(&CADoubletsBuffer);
     }
     
     /* CON LE CACHEs : NON TESTATO
