@@ -272,11 +272,16 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     
     HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
     
-    //std::vector<FKDTree<float,3>> layersHitsTree;
-    LayerTree albero1; albero1.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
+    std::vector<FKDTree<float,3>*> layersHitsTree;/*
+    LayerTree albero1; FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
     LayerTree albero2; albero2.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[1],region,ev,es);
     LayerTree albero3; albero3.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[2],region,ev,es);
-    LayerTree albero4; albero4.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[3],region,ev,es);
+    LayerTree albero4; albero4.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[3],region,ev,es);*/
+    
+    auto const & albero1 = (theKDTreeCache)(fourLayers[0],region,ev,es); layersHitsTree.push_back(&albero1);
+    auto const & albero2 = (theKDTreeCache)(fourLayers[1],region,ev,es); layersHitsTree.push_back(&albero2);
+    auto const & albero3 = (theKDTreeCache)(fourLayers[2],region,ev,es); layersHitsTree.push_back(&albero3);
+    auto const & albero4 = (theKDTreeCache)(fourLayers[3],region,ev,es); layersHitsTree.push_back(&albero4);
     
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],albero1);
     auto const & doublets2 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],albero2);
