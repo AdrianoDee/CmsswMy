@@ -273,30 +273,20 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
     
     //std::vector<FKDTree<float,3>> layersHitsTree;
-    FKDTree<float,3> layersHitsTree[4];
-    HitDoubletsCA* layersDoublets;
+    LayerTree albero1; albero1.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
+    LayerTree albero2; albero2.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[1],region,ev,es);
+    LayerTree albero3; albero3.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[2],region,ev,es);
+    LayerTree albero4; albero4.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[3],region,ev,es);
+    
+    HitDoubletsCA doublets1; caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],albero1);
+    HitDoubletsCA doublets2; caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],albero2);
+    HitDoubletsCA doublets3; caDoubletsGenerator.doublets(region,ev,es,fourLayers[2],fourLayers[3],albero3);
+    
     //std::vector<HitDoubletsCA> layersDoublets;
     
     //std::vector<CACell::CAntuplet> foundQuadruplets;
     std::vector<unsigned int> indexOfFirstCellOfLayer;
     std::vector<unsigned int> numberOfCellsPerLayer;
-    
-    for (int i = 0; i<4;i++)
-    {
-        LayerTree alberoBuffer;
-        alberoBuffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[i],region,ev,es);
-        std::cout<<"Tree Done : "<<fourLayers[i].name()<<std::endl;
-        layersHitsTree[i] = &alberoBuffer;
-        bool corretto = alberoBuffer.FKDTree<float,3>::test_correct_build();
-        if(corretto) std::cout<<"Tree Correctly Built"<<std::endl;
-    }
-    
-    for (int j=0;j<4-1;j++)
-    {
-
-        layersDoublets[j] = &(caDoubletsGenerator.doublets(region,ev,es,fourLayers[j],fourLayers[j+1],layersHitsTree[j]));
-        
-    }
     
     /* CON LE CACHEs : NON TESTATO
     for (auto layer : fourLayers)
