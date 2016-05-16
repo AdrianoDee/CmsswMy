@@ -273,7 +273,6 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
     
     std::vector<FKDTree<float,3>* > layersHitsTree;
-    std::vector<std::vector<FKDTree<float,3>*> > layersHitsTreePairs;
     std::vector<HitDoubletsCA*> layersDoublets;
     
     //std::vector<CACell::CAntuplet> foundQuadruplets;
@@ -284,6 +283,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     {
         LayerTree alberoBuffer;
         alberoBuffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,ev,es);
+        std::cout<<"Tree Done : "<<layer.name()<<std::endl;
         layersHitsTree.push_back(&(alberoBuffer));
     }
     
