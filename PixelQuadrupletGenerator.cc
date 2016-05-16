@@ -278,9 +278,9 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     LayerTree albero3; albero3.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[2],region,ev,es);
     LayerTree albero4; albero4.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[3],region,ev,es);
     
-    HitDoubletsCA doublets1; caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],albero1);
-    HitDoubletsCA doublets2; caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],albero2);
-    HitDoubletsCA doublets3; caDoubletsGenerator.doublets(region,ev,es,fourLayers[2],fourLayers[3],albero3);
+    auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],albero1);
+    auto const & doublets2 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],albero2);
+    auto const & doublets3 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[2],fourLayers[3],albero3);
     
     //std::vector<HitDoubletsCA> layersDoublets;
     
