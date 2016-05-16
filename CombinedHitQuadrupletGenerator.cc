@@ -38,7 +38,7 @@ void CombinedHitQuadrupletGenerator::hitQuadruplets(
    const TrackingRegion& region, OrderedHitSeeds & result,
    const edm::Event& ev, const edm::EventSetup& es)
 {
-  OrderedHitSeeds & resultCA; //CA RESULTS FOR COMPARISON
+  OrderedHitSeeds resultCA; //CA RESULTS FOR COMPARISON
   edm::Handle<SeedingLayerSetsHits> hlayers;
   ev.getByToken(theSeedingLayerToken, hlayers);
   const SeedingLayerSetsHits& layers = *hlayers;
