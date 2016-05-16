@@ -117,10 +117,10 @@ namespace {
           std::cout<<"z max : "<<zmax<<std::endl;
 		   
 		  
-          LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
+          const LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
           //LayerPoint minPoint(-10000,-10000,-10000,0);
           std::cout<<"LayerPoint Min : done!"<<std::endl;
-          LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
+          const LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           std::cout<<"LayerPoint Max : done!"<<std::endl;
           
           innerTree.LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
