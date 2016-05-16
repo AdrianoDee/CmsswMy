@@ -290,7 +290,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     for (int j=0;j<(int)layersHitsTree.size()-1;j++)
     {
 
-        auto const & CADoubletsBuffer = caDoubletsGenerator.doublets(region,ev,es,fourLayers[j],fourLayers[j+1],*layersHitsTree[j]));
+        auto const & CADoubletsBuffer = caDoubletsGenerator.doublets(region,ev,es,fourLayers[j],fourLayers[j+1],*layersHitsTree[j]);
         layersDoublets.push_back(&CADoubletsBuffer);
     }
     
