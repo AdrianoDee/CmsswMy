@@ -50,7 +50,7 @@ void CombinedHitQuadrupletGenerator::hitQuadruplets(
       theGenerator->hitQuadruplets(region, result, ev, es, tripletAndLayers.first, tripletAndLayers.second);
   }
   
-  for(int j=0; j<(int)layers.size();j++) { {
+  for(int j=0; j<(int)layers.size();j++) { 
         theGenerator->hitQuadruplets(region, resultCA, ev, es,layers[j]);
     }
     
