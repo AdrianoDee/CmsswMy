@@ -27,7 +27,7 @@ public:
   virtual ~HitQuadrupletGeneratorFromTripletAndLayers();
 
   void init( std::unique_ptr<HitTripletGeneratorFromPairAndLayers>&& tripletGenerator, LayerCacheType* layerCache);
-  void init( std::unique_ptr<HitTripletGeneratorFromPairAndLayers>&& tripletGenerator, LayerCacheType* layerCache, LayerTreeCacheType treeCache, LayerDoubletsCacheType doubletsCache);
+  void init( std::unique_ptr<HitTripletGeneratorFromPairAndLayers>&& tripletGenerator, LayerCacheType* layerCache, LayerTreeCacheType* treeCache, LayerDoubletsCacheType* doubletsCache);
 
   virtual void hitQuadruplets( const TrackingRegion& region, OrderedHitSeeds& result,
                                const edm::Event& ev, const edm::EventSetup& es,
