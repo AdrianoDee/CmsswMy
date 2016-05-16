@@ -283,6 +283,20 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     
     for (auto layer : fourLayers)
     {
+        LayerTree alberoBuffer;
+        alberoBuffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,ev,es);
+        layersHitsTree.push_back(&(alberoBuffer));
+    }
+    
+    for (int j=0;j<(int)layersHitsTree.size()-1;j++)
+    {
+
+        layersDoublets.push_back(&(caDoubletsGenerator.doublets(region,ev,es,fourLayers[j],fourLayers[j+1],layersHitsTree[j])));
+    }
+    
+    /* CON LE CACHEs : NON TESTATO
+    for (auto layer : fourLayers)
+    {
         layersHitsTree.push_back(&(*theKDTreeCache)(layer,region,ev,es));
     }
     
@@ -290,7 +304,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     {
         layersDoublets.push_back(&(*theDoubletsCache)(fourLayers[j],fourLayers[j+1],(*layersHitsTree[j]),region,ev,es)); //Passa vector
     }
-    
+    */
     
     //QUI SOTTO CI VA IL CELLULAR AUTOMATON
 /*
