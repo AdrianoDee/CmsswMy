@@ -285,7 +285,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     {
         LayerTree alberoBuffer;
         alberoBuffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[i],region,ev,es);
-        std::cout<<"Tree Done : "<<layer.name()<<std::endl;
+        std::cout<<"Tree Done : "<<fourLayers[i].name()<<std::endl;
         layersHitsTree[i] = alberoBuffer;
         bool corretto = alberoBuffer.FKDTree<float,3>::test_correct_build();
         if(corretto) std::cout<<"Tree Correctly Built"<<std::endl;
