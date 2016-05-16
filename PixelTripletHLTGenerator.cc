@@ -67,6 +67,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
 {
     
   std::cout<<"PixelTripletsHLT : in!"<<std::endl;
+  /*
   //FeliceKDTree!
   LayerTree alberoFuori;
   alberoFuori.FKDTree<float,3>::make_FKDTreeFromRegionLayer(pairLayers[1],region,ev,es);
@@ -75,7 +76,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   bool corretto = alberoFuori.FKDTree<float,3>::test_correct_build();
   if(corretto) std::cout<<"Tree Correctly Built"<<std::endl;
   HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
-    
+  */
   if (theComparitor) theComparitor->init(ev, es);
   
   std::cout<<"INNER LAYER :  " <<pairLayers[0].name()<<std::endl;
@@ -83,7 +84,12 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   std::cout<<"---------------------------------------"<<std::endl;
   std::cout<<"OUTER LAYER :  " <<pairLayers[1].name()<<std::endl;
   std::cout<<"Thickness :  " <<pairLayers[1].detLayer()->surface().bounds().thickness()<<std::endl;
+    
+    
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
+    
+    
+    
   std::cout<<"Legacy Doublets : done!"<<std::endl;
   std::cout<<doublets.size()<<" doublets found!"<<std::endl;
     for(int j=0;j <(int)doublets.size();j++){
@@ -91,14 +97,14 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     }
     
     printf("\n");
-  
+  /*
   auto const & CADoublets = caDoubletsGenerator.doublets(region,ev,es, pairLayers[0],pairLayers[1],alberoFuori);
   std::cout<<"CA Doublets : done!"<<std::endl;
   std::cout<<CADoublets.size()<<" CA doublets found!"<<std::endl;
     for(int j=0;j <(int)CADoublets.size();j++){
         std::cout<<" [ "<<CADoublets.innerHitId(j) <<" - "<<CADoublets.outerHitId(j)<<" ]  ";
     }
-  
+  */
   if (doublets.empty()) return;
 
   auto outSeq =  doublets.detLayer(HitDoublets::outer)->seqNum();
