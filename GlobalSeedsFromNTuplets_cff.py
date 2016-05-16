@@ -19,12 +19,11 @@ globalSeedsFromNTuplets = RecoTracker.TkSeedGenerator.SeedGeneratorFromRegionHit
     OrderedHitsFactoryPSet = cms.PSet(
       ComponentName = cms.string('StandardCANtupletGenerator'),
       SeedingLayers = cms.InputTag('PixelLayerQuadrupletsCA'),
-      GeneratorPSet = cms.PSet(PixelTripletHLTGenerator.clone(maxElement = cms.uint32(1000000)))
+      GeneratorPSet = cms.PSet(CANtupleHLTGenerator_cfi.clone(maxElement = cms.uint32(1000000)))
 # this one uses an exact helix extrapolation and can deal correctly with
 # arbitrarily large D0 and generally exhibits a smaller fake rate:
 #     GeneratorPSet = cms.PSet(PixelTripletLargeTipGenerator)
     )
 )
-eras.trackingPhase1PU70.toModify(globalSeedsFromTriplets,
-    OrderedHitsFactoryPSet = dict(GeneratorPSet = dict(maxElement = 0)),
-)
+
+

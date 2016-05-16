@@ -30,7 +30,7 @@ iterTracking = cms.Sequence(InitialStepPreSplitting*
                             MixedTripletStep*
                             PixelLessStep*
                             TobTecStep*
-			    JetCoreRegionalStep *	
+                            JetCoreRegionalStep *
                             earlyGeneralTracks*
                             muonSeededStep*
                             preDuplicateMergingGeneralTracks*
@@ -75,11 +75,11 @@ eras.trackingPhase1.toReplaceWith(iterTracking, cms.Sequence(
     ConvStep +
     conversionStepTracks
 ))
-eras.trackingPhase1.toReplaceWith(iterTracking, cms.Sequence(
+eras.trackingPhase1CA.toReplaceWith(iterTracking, cms.Sequence(
                                                              InitialStepPreSplitting +
                                                              InitialStep +
                                                              HighPtTripletStep +
-                                                             DetachedQuadStepCA +
+                                                             DetachedQuadStep +
                                                              #DetachedTripletStep + # FIXME: dropped for time being, but it may be enabled on the course of further tuning
                                                              LowPtQuadStep +
                                                              LowPtTripletStep +

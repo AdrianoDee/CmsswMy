@@ -11,6 +11,8 @@
 #include <vector>
 #include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
 #include "RecoTracker/TkHitPairs/interface/LayerHitMapCache.h"
+#include "RecoTracker/TkHitPairs/interface/LayerFKDTreeCache.h"
+#include "RecoTracker/TkHitPairs/interface/LayerDoubletsCache.h"
 
 class HitTripletGeneratorFromPairAndLayers;
 
