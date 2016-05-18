@@ -45,23 +45,22 @@ public:
 
   void clear() { theCache.clear(); }
   
-  LayerTree &
-  operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
-	     const edm::Event & iE, const edm::EventSetup & iS) {
+  void operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
+	     const edm::Event & iE, const edm::EventSetup & iS,LayerTree *cacheTree) {
     int key = layer.index();
     assert (key>=0);
-    LayerTree * cacheTree = theCache.get(key);
+    cacheTree = theCache.get(key);
     if (cacheTree==nullptr) {
         cacheTree->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
     /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
-      theCache.add(key,cacheTree);
+        theCache.add(key,cacheTree);
     }
     else{
       // std::cout << region.origin() << " " <<  lhm->theOrigin << std::endl;
       LogDebug("LayerFKDTreeCache")<<" FKDTree for layer"<< layer.detLayer()<<" already in the cache with key: "<<key;
     }
     //const Tree result(*buffer);
-    return *cacheTree;
+    //return *cacheTree;
   }
 
 private:
