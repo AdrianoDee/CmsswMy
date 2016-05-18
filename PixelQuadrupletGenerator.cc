@@ -288,8 +288,6 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
         std::cout<<"Tree cached "<<std::endl;
     }
     
-    LayerTree & treeFirst;
-    = theKDTreeCache(fourLayers[0],region,ev,es);//treeFirst.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
     layersHitsTree.push_back(&treeFirst);
     LayerTree treeSecond; treeSecond.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[1],region,ev,es);
     layersHitsTree.push_back(&treeSecond);
