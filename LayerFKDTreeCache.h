@@ -51,7 +51,7 @@ public:
     int key = layer.index();
     assert (key>=0);
     LayerTree * cacheTree = theCache.get(key);
-    if (albero==nullptr) {
+    if (cacheTree==nullptr) {
         cacheTree->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
     /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
       theCache.add(key,cacheTree);
