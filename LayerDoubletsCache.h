@@ -72,7 +72,7 @@ public:
         
         HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
 
-        HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree);
+        HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,*innerTree);
 
         buffer = &result;
     /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
