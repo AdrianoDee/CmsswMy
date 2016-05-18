@@ -296,7 +296,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
     std::cout<<"CA Doublets : done!"<<std::endl;
     std::cout<<doublets1.size()<<" CA doublets found!"<<std::endl;
-    for(int j=0;j <(int)CADoublets.size();j++){
+    for(int j=0;j <(int)doublets1.size();j++){
         std::cout<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
     }
     
@@ -305,7 +305,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::cout<<"INNER LAYER :  " <<fourLayers[1].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[2].name()<<std::endl;
     std::cout<<"CA Doublets : done!"<<std::endl;
     std::cout<<doublets2.size()<<" CA doublets found!"<<std::endl;
-    for(int j=0;j <(int)CADoublets.size();j++){
+    for(int j=0;j <(int)doublets2.size();j++){
         std::cout<<" [ "<<doublets2.innerHitId(j) <<" - "<<doublets2.outerHitId(j)<<" ]  ";
     }
     
