@@ -45,7 +45,7 @@ public:
 
   void clear() { theCache.clear(); }
   
-  void operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
+  void getBuiltTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
 	     const edm::Event & iE, const edm::EventSetup & iS,LayerTree *cacheTree) {
     int key = layer.index();
     assert (key>=0);
