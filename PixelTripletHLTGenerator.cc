@@ -79,7 +79,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   */
   if (theComparitor) theComparitor->init(ev, es);
   
-  std::cout<<"INNER LAYER :  " <<pairLayers[0].name()<<"    ";//<<std::endl;
+    std::cout<<"INNER LAYER :  " <<pairLayers[0].name()<<"    "<<"OUTER LAYER :  " <<pairLayers[1].name()<<std::endl;
   //std::cout<<"Thickness :  " <<pairLayers[1].detLayer()->surface().bounds().thickness()<<std::endl;
     
     
