@@ -41,10 +41,16 @@ private:
 private:
   typedef FKDTreeCache Cache;
 public:
-  LayerFKDTreeCache(unsigned int initSize=50) : theCache(initSize) { }
+  LayerFKDTreeCache(unsigned int initSize=1000) : theCache(initSize) { }
 
   void clear() { theCache.clear(); }
+  bool checkCache(int key) {return (!(theContainer[key]==nullptr)); }
+  void getCache(int key,LayerTree* tree){
+        if(checkCache) return theContainer[key];
+    }
+  void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
   
+  /*
   LayerTree &
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
 	     const edm::Event & iE, const edm::EventSetup & iS) {
@@ -53,7 +59,7 @@ public:
     LayerTree * cacheTree = theCache.get(key);
     if (cacheTree==nullptr) {
         cacheTree->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
-    /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
+    /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();
       theCache.add(key,cacheTree);
     }
     else{
@@ -62,7 +68,7 @@ public:
     }
     //const Tree result(*buffer);
     return *cacheTree;
-  }
+  }*/
 
 private:
   Cache theCache; 

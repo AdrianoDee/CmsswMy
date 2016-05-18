@@ -53,7 +53,7 @@ private:
 private:
   typedef DoubletsCache Cache;
 public:
-  LayerDoubletsCache(unsigned int initSize=100) : theCache(initSize){ }
+  LayerDoubletsCache(unsigned int initSize=1000) : theCache(initSize){ }
   
   void clear() { theCache.clear(); }
     
