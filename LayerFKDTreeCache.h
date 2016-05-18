@@ -44,7 +44,7 @@ public:
   LayerFKDTreeCache(unsigned int initSize=1000) : theCache(initSize) { }
 
   void clear() { theCache.clear(); }
-  bool checkCache(int key) {return (!(theCache.theContainer[key]==nullptr)); }
+  bool checkCache(int key) {return (!(theCache.get(key)==nullptr)); }
   void getCache(int key,LayerTree* tree){
         if(checkCache) return theContainer[key];
     }
