@@ -277,12 +277,15 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     LayerTree treeFirst;
     std::cout<<"Checking cache for id : "<< <<std::endl;
     if(theKDTreeCache.checkCache(fourLayers[0].index())){
-        std::cout<<"Tree already done "<< <<std::endl;
+        std::cout<<"Tree already done "<<fourLayers[0].index()<<std::endl;
         theKDTreeCache.getCache(fourLayers[0].index(),&treeFirst);
-        std::cout<<"Tree copied "<< <<std::endl;
+        std::cout<<"Tree copied "<<std::endl;
     } else {
+        std::cout<<"Tree to be created "<<fourLayers[0].index()<<std::endl;
         treeFirst.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
+        std::cout<<"Tree created "<<std::endl;
         theKDTreeCache.writeCache(fourLayers[0].index(),&treeFirst);
+        std::cout<<"Tree cached "<<std::endl;
     }
     
     LayerTree & treeFirst;
