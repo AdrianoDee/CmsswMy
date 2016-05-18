@@ -293,8 +293,29 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     */
     
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],layersHitsTree[0]);
+    std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
+    std::cout<<"CA Doublets : done!"<<std::endl;
+    std::cout<<doublets1.size()<<" CA doublets found!"<<std::endl;
+    for(int j=0;j <(int)CADoublets.size();j++){
+        std::cout<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
+    }
+    
+    
     auto const & doublets2 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],layersHitsTree[1]);
+    std::cout<<"INNER LAYER :  " <<fourLayers[1].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[2].name()<<std::endl;
+    std::cout<<"CA Doublets : done!"<<std::endl;
+    std::cout<<doublets2.size()<<" CA doublets found!"<<std::endl;
+    for(int j=0;j <(int)CADoublets.size();j++){
+        std::cout<<" [ "<<doublets2.innerHitId(j) <<" - "<<doublets2.outerHitId(j)<<" ]  ";
+    }
+    
     auto const & doublets3 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[2],fourLayers[3],layersHitsTree[2]);
+    std::cout<<"INNER LAYER :  " <<fourLayers[2].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[3].name()<<std::endl;
+    std::cout<<"CA Doublets : done!"<<std::endl;
+    std::cout<<doublets3.size()<<" CA doublets found!"<<std::endl;
+    for(int j=0;j <(int)doublets3.size();j++){
+        std::cout<<" [ "<<doublets3.innerHitId(j) <<" - "<<doublets3.outerHitId(j)<<" ]  ";
+    }
     
     //std::vector<HitDoubletsCA> layersDoublets;
     
