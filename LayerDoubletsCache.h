@@ -60,7 +60,7 @@ public:
   //void init(LayerFKDTreeCache* tree) { theTreeCache = std::move(tree); }
   
     const HitDoubletsCA &
-    operator()(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree & innerTree, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
+    operator()(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
     //const unsigned short int nLayers = layers.size();
     //assert (nLayers == 2, "Error : two layers needed!" );
         
@@ -72,7 +72,7 @@ public:
         
         HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
 
-        HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,*innerTree);
+        HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree);
 
         buffer = &result;
     /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
