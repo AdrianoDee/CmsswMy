@@ -47,7 +47,7 @@ namespace {
       checkRZ=reinterpret_cast<Algo const *>(a);
     }
     
-      void operator()(LayerTree& innerTree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
+      void operator()(LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
           /*
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
           
@@ -123,7 +123,7 @@ namespace {
           const LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           std::cout<<"LayerPoint Max : done!"<<std::endl;
           
-          innerTree.LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
+          tree->LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
           
           std::cout<<"FKDTree Search : done!"<<std::endl;
           
@@ -156,7 +156,7 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 
 HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
-                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree & innerTree) {
+                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree) {
     
   std::cout<<"Hit Doublets CA Generator : in!  -  ";
   HitDoubletsCA result(innerLayer,outerLayer);
