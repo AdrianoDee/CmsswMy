@@ -274,25 +274,24 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     
     std::vector<FKDTree<float,3>*> layersHitsTree;
     
-    LayerTree treeFirst;
-    std::cout<<"Checking cache for id : "<<fourLayers[0].index()<<std::endl;
-    if(theKDTreeCache->checkCache(fourLayers[0].index())){
-        std::cout<<"Tree already done "<<std::endl;
-        theKDTreeCache->getCache(fourLayers[0].index(),&treeFirst);
-        std::cout<<"Tree copied "<<std::endl;
-    } else {
-        std::cout<<"Tree to be created "<<fourLayers[0].index()<<std::endl;
-        treeFirst.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
-        std::cout<<"Tree created "<<std::endl;
-        theKDTreeCache->writeCache(fourLayers[0].index(),&treeFirst);
-        std::cout<<"Tree cached "<<std::endl;
+    LayerTree trees[3];
+    for (int j=0; j<3; j++) {
+        std::cout<<"Checking cache for id : "<<fourLayers[j].index()<<std::endl;
+        if(theKDTreeCache->checkCache(fourLayers[j].index())){
+            std::cout<<"Tree already done "<<std::endl;
+            theKDTreeCache->getCache(fourLayers[j].index(),&trees[j]);
+            std::cout<<"Tree copied "<<std::endl;
+            layersHitsTree.push_back(&trees[j]);
+        } else {
+            std::cout<<"Tree to be created "<<fourLayers[j].index()<<std::endl;
+            trees[j].LayerTree::make_FKDTreeFromRegionLayer(fourLayers[j],region,ev,es);
+            std::cout<<"Tree created "<<std::endl;
+            theKDTreeCache->writeCache(fourLayers[j].index(),&treeFirst);
+            std::cout<<"Tree cached "<<std::endl;
+            layersHitsTree.push_back(&trees[j]);
+        }
     }
     
-    layersHitsTree.push_back(&treeFirst);
-    LayerTree treeSecond; treeSecond.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[1],region,ev,es);
-    layersHitsTree.push_back(&treeSecond);
-    LayerTree treeThird; treeThird.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[2],region,ev,es);
-    layersHitsTree.push_back(&treeThird);
     /*
     LayerTree treeFourth; treeFourth.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[3],region,ev,es);
     layersHitsTree.push_back(&treeFourth);*/
