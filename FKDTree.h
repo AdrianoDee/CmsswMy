@@ -89,6 +89,7 @@ public:
         thePoints.clear();
         theIndecesToVisit.clear();
     }
+    
     /*
     FKDTree(const FKDTree<TYPE, numberOfDimensions>& other)
     {
