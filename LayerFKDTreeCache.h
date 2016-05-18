@@ -46,7 +46,7 @@ public:
   void clear() { theCache.clear(); }
   bool checkCache(int key) {return (!(theCache.get(key)==nullptr)); }
   void getCache(int key,LayerTree* tree){
-        if(checkCache(key)) return theCache.get(key);
+        if(checkCache(key)) tree = theCache.get(key);
     }
   void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
   
