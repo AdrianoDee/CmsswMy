@@ -55,7 +55,7 @@ public:
       int key = layer.index();
       assert (key>=0);
       
-      LayerTree * cache = theCache.get(key);
+      const LayerTree * cache = theCache.get(key);
       const LayerTree *buffer = new FKDTree<float,3>();
       if (cache==nullptr) {
           
