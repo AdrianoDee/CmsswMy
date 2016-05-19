@@ -56,7 +56,7 @@ public:
       assert (key>=0);
       
       const LayerTree * cache = theCache.get(key);
-      if (buffer==nullptr) {
+      if (cache==nullptr) {
           LayerTree buffer;
           buffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
           
