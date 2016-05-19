@@ -59,6 +59,7 @@ public:
       LayerTree *buffer = new FKDTree<float,3>();
       if (cache==nullptr) {
           
+          std::cout<<"Nullptr : let's do the tree!"<<std::endl;
           buffer->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
           
           cache = buffer;
@@ -66,7 +67,7 @@ public:
           
       }
 
-      return *buffer;}
+      return *cache;}
   /*
   LayerTree &
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
