@@ -296,7 +296,7 @@ public:
     
     void search_in_the_box(const FKDPoint<TYPE, numberOfDimensions>& minPoint,
                            const FKDPoint<TYPE, numberOfDimensions>& maxPoint,
-                           std::vector<unsigned int>& foundPoints) const
+                           std::vector<unsigned int>& foundPoints)
     {
         std::cout<<" FKDTree "<<std::endl;
         theIndecesToVisit.clear();
