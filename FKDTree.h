@@ -15,6 +15,8 @@
 #include "DataFormats/TrackerRecHit2D/interface/BaseTrackerRecHit.h"
 #include "TrackingTools/DetLayers/interface/DetLayer.h"
 #include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
+#include "RecoTracker/TkTrackingRegions/interface/TrackingRegion.h"
+#include "FWCore/Framework/interface/EventSetup.h"
 
 typedef BaseTrackerRecHit const * Hit;
 
