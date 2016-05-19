@@ -219,6 +219,17 @@ public:
         theFront = 0;
         theTail = 0;
     }
+    
+    void clear()const
+    {
+#ifdef USE_VECTOR
+        theBuffer.clear();
+#endif
+        theSize = 0;
+        theFront = 0;
+        theTail = 0;
+    }
+
 private:
     unsigned int theSize;
     unsigned int theFront;
