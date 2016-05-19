@@ -156,7 +156,7 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 
 HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
-                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree) {
+                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, const LayerTree* innerTree) {
     
   std::cout<<"Hit Doublets CA Generator : in!  -  ";
   HitDoubletsCA result(innerLayer,outerLayer);
