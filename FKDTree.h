@@ -14,6 +14,7 @@
 #include "DataFormats/GeometryVector/interface/Pi.h"
 #include "DataFormats/TrackerRecHit2D/interface/BaseTrackerRecHit.h"
 #include "TrackingTools/DetLayers/interface/DetLayer.h"
+#include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
 
 typedef BaseTrackerRecHit const * Hit;
 
@@ -551,6 +552,7 @@ public:
         }
         
     }
+
     
     void make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
