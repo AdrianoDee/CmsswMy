@@ -47,7 +47,7 @@ namespace {
       checkRZ=reinterpret_cast<Algo const *>(a);
     }
     
-      void operator()(const LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) {
+      void operator()(LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) {
 		  
 		  LayerTree hereTree = &tree;
 		  /*
@@ -158,7 +158,7 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 
 HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
-                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, const LayerTree* innerTree) {
+                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree* innerTree) {
     
   std::cout<<"Hit Doublets CA Generator : in!  -  ";
   HitDoubletsCA result(innerLayer,outerLayer);

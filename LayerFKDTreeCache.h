@@ -50,12 +50,12 @@ public:
     }*/
   //void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
   
-  const LayerTree & getTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
+   LayerTree & getTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
       
       int key = layer.index();
       assert (key>=0);
       
-      const LayerTree * cache = theCache.get(key);
+      LayerTree * cache = theCache.get(key);
       LayerTree *buffer = new FKDTree<float,3>();
       if (cache==nullptr) {
           
