@@ -90,6 +90,7 @@ public:
         theIndecesToVisit.clear();
     }
     
+    /*
     FKDTree<float,3>(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
         
@@ -130,10 +131,10 @@ public:
         
         std::cout<<"Tree from point array: done & built!"<<std::endl;
         
-    }
+    }*/
     
     
-    /*
+    
     FKDTree(const FKDTree<TYPE, numberOfDimensions>& other)
     {
         theNumberOfPoints(other.theNumberOfPoints);
@@ -176,7 +177,7 @@ public:
         for (int i = 0; i < numberOfDimensions; ++i)
             theDimensions = std::move(other.theDimensions);
     }
-    */
+    
     FKDTree<TYPE, numberOfDimensions>& operator=(
                                                  FKDTree<TYPE, numberOfDimensions> && other)
     {

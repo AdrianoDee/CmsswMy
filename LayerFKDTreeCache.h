@@ -55,15 +55,17 @@ public:
       int key = layer.index();
       assert (key>=0);
       
-      const LayerTree * buffer = theCache.get(key);
+      const LayerTree * cache = theCache.get(key);
       if (buffer==nullptr) {
+          LayerTree buffer;
+          buffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
           
-          buffer = new FKDTree<float,3>(layer,region,iE,iS);
-          theCache.add(key,buffer);
+          cache = new FKDTree(&buffer);
+          theCache.add(key,cache);
           
       }
 
-      return *buffer;}
+      return *cache;}
   /*
   LayerTree &
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
