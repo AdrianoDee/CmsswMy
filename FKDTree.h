@@ -90,7 +90,7 @@ public:
         theIndecesToVisit.clear();
     }
     
-    FKDTree<float,3>(const std::vector<Hit>& hits, GlobalPoint const & origin, const edm::Event & iEvent, const edm::EventSetup & iSetup);
+    FKDTree(const std::vector<Hit>& hits, GlobalPoint const & origin, const edm::Event & iEvent, const edm::EventSetup & iSetup);
     
     /*
     FKDTree<float,3>(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)

@@ -14,7 +14,7 @@
 #include "DataFormats/TrackerRecHit2D/interface/BaseTrackerRecHit.h"
 #include "TrackingTools/DetLayers/interface/DetLayer.h"
 
-FKDTree::FKDTree<float,3>(const std::vector<Hit>& hits, GlobalPoint const & origin, DetLayer const * il) :
+FKDTree::FKDTree(const std::vector<Hit>& hits, GlobalPoint const & origin, DetLayer const * il) :
 
     theNumberOfPoints(2*hits.size()),
     theDepth(FLOOR_LOG2(theNumberOfPoints)),
