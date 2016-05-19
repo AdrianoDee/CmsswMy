@@ -161,6 +161,42 @@ public:
         
     }
     
+    void push_back(const T & value)const
+    {
+#ifdef USE_VECTOR
+        if (theSize >= theCapacity)
+        {
+            theBuffer.reserve(theCapacity + theTail);
+            if (theFront != 0)
+            {
+                for (unsigned int i = 0; i < theTail; ++i)
+                {
+                    theBuffer.push_back(theBuffer[i]);
+                }
+                theCapacity += theTail;
+                
+                theTail = 0;
+            }
+            else
+            {
+                
+                theBuffer.resize(theCapacity + 16);
+                theTail += theCapacity;
+                theCapacity += 16;
+                
+            }
+            
+        }
+#endif
+        assert(theSize < theBuffer.size());
+        theBuffer[theTail] = value;
+        theTail = wrapIndex(theTail + 1);
+        
+        theSize++;
+        
+        
+    }
+    
     void print()
     {
         std::cout << "printing the content of the queue:" << std::endl;
@@ -191,6 +227,15 @@ public:
         theFront = wrapIndex(theFront + elementsToErase);
     }
     
+    void pop_front(const unsigned int numberOfElementsToPop)const
+    {
+        unsigned int elementsToErase =
+        theSize > numberOfElementsToPop ?
+        numberOfElementsToPop : theSize;
+        theSize -= elementsToErase;
+        theFront = wrapIndex(theFront + elementsToErase);
+    }
+    
     void reserve(unsigned int capacity)
     {
 #ifdef USE_VECTOR
@@ -209,6 +254,12 @@ public:
     {
         return theBuffer[wrapIndex(theFront + index)];
     }
+    
+    T & operator[](unsigned int index)const
+    {
+        return theBuffer[wrapIndex(theFront + index)];
+    }
+
     
     void clear()
     {
