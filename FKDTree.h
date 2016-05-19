@@ -90,6 +90,8 @@ public:
         theIndecesToVisit.clear();
     }
     
+    FKDTree<float,3>(const std::vector<Hit>& hits, GlobalPoint const & origin, const edm::Event & iEvent, const edm::EventSetup & iSetup);
+    
     /*
     FKDTree<float,3>(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
@@ -116,7 +118,7 @@ public:
             if (phi>safePhi) {thePoints.push_back(make_FKDPoint(phi-Geom::ftwoPi(),z,r,pointID)); pointID++;}
             else if (phi<-safePhi) {thePoints.push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,r,pointID));pointID++;}
             
-        }
+        the
         std::cout<<"Point array: done!"<<std::endl;
         
         theNumberOfPoints = thePoints.size();
