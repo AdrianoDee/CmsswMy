@@ -274,8 +274,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     
     //std::vector<FKDTree<float,3>*> layersHitsTree;
     
-    /*
-    LayerTree trees[3];
+    
+    bool treesFlags[3];
     for (int j=0; j<3; j++) {
         std::cout<<"Checking cache for id : "<<fourLayers[j].index()<<std::endl;
         if(theKDTreeCache->checkCache(fourLayers[j].index())){
@@ -291,7 +291,9 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
             std::cout<<"Tree cached "<<std::endl;
             //layersHitsTree.push_back(&trees[j]);
         }
-    }*/
+    }
+    
+    
     
     /*
     LayerTree treeFourth; treeFourth.FKDTree<float,3>::make_FKDTreeFromRegionLayer(fourLayers[3],region,ev,es);

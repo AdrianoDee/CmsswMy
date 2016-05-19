@@ -22,9 +22,9 @@ private:
     FKDTreeCache(unsigned int initSize) : theContainer(initSize, nullptr){}
     ~FKDTreeCache() { clear(); }
     void resize(int size) { theContainer.resize(size,nullptr); }
-    LayerTree*  get(int key) { return theContainer[key];}
+    const LayerTree*  get(int key) { return theContainer[key];}
     /// add object to cache. It is caller responsibility to check that object is not yet there.
-    void add(int key, LayerTree * value) {
+    void add(int key,const LayerTree * value) {
       if (key>=int(theContainer.size())) resize(key+1);
       theContainer[key]=value;
     }
@@ -33,7 +33,7 @@ private:
       for ( auto & v : theContainer)  { delete v; v=nullptr;}
     }
   private:
-    std::vector<LayerTree *> theContainer;
+    std::vector<const LayerTree *> theContainer;
   private:
     FKDTreeCache(const FKDTreeCache &) { }
   };
@@ -45,12 +45,25 @@ public:
 
   void clear() { theCache.clear(); }
   bool checkCache(int key) {return (!(theCache.get(key)==nullptr)); }
-  void getCache(int key,LayerTree* tree){
+  //void getCache(int key,LayerTree* tree){
         if(checkCache(key)) tree = theCache.get(key);
     }
-  void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
+  //void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
   
-  const LayerTree & getTree(int key) {return *theCache.get(key);}
+  const LayerTree & getTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
+      
+      int key = layer.index();
+      assert (key>=0);
+      
+      const LayerTree * buffer = theCache.get(key);
+      if (buffer==nullptr) {
+          
+          buffer = new LayerTree(layer,region,iE,iS);
+          theCache.add(key,buffer);
+          
+      }
+
+      return *buffer;}
   /*
   LayerTree &
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
