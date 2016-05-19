@@ -47,7 +47,7 @@ namespace {
       checkRZ=reinterpret_cast<Algo const *>(a);
     }
     
-      void operator()(LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
+      void operator()(const LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
           /*
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
           
