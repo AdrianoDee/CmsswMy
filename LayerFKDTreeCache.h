@@ -58,7 +58,7 @@ public:
       const LayerTree * buffer = theCache.get(key);
       if (buffer==nullptr) {
           
-          buffer = new FKDTree<float,3>::FKDTree(layer,region,iE,iS);
+          buffer = new FKDTree<TYPE,numberOfDimensions>::FKDTree(layer,region,iE,iS);
           theCache.add(key,buffer);
           
       }
