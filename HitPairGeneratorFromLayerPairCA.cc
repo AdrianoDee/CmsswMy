@@ -49,7 +49,7 @@ namespace {
     
       void operator()(const LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
 		  
-		  LayerTree hereTree = *tree;
+		  LayerTree *hereTree = tree;
 		  /*
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
           
