@@ -45,9 +45,9 @@ public:
 
   void clear() { theCache.clear(); }
   bool checkCache(int key) {return (!(theCache.get(key)==nullptr)); }
-  //void getCache(int key,LayerTree* tree){
+  /*void getCache(int key,LayerTree* tree){
         if(checkCache(key)) tree = theCache.get(key);
-    }
+    }*/
   //void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
   
   const LayerTree & getTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
