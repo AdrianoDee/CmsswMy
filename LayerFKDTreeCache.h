@@ -50,6 +50,7 @@ public:
     }
   void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
   
+  const LayerTree & getTree(int key) {return *theContainer[key];}
   /*
   LayerTree &
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
