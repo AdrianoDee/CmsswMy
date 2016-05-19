@@ -310,6 +310,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     auto const & albero4 = (theKDTreeCache)(fourLayers[3],region,ev,es); layersHitsTree.push_back(&albero4);
     */
     
+    if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
+    
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
     std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
     std::cout<<"CA Doublets : done!"<<std::endl;
@@ -319,7 +321,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     }
     
     
-    if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
+    
     
     auto const & doublets2 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],&middleTree);
     std::cout<<"INNER LAYER :  " <<fourLayers[1].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[2].name()<<std::endl;
