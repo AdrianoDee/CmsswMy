@@ -56,12 +56,12 @@ public:
       assert (key>=0);
       
       const LayerTree * cache = theCache.get(key);
-      const LayerTree *buffer = new FKDTree<float,3>();
+      LayerTree *buffer = new FKDTree<float,3>();
       if (cache==nullptr) {
           
-          cache->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
+          buffer->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
           
-          buffer = cache;
+          cache = buffer;
           theCache.add(key,cache);
           
       }
