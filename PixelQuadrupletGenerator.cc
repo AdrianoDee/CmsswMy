@@ -293,9 +293,9 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
         }
     }*/
     
-    const LayerTree & innerTree = getTree(fourLayers[0],region,ev,es);
-    const LayerTree & middleTree = getTree(fourLayers[1],region,ev,es);
-    const LayerTree & outerTree = getTree(fourLayers[2],region,ev,es);
+    const LayerTree & innerTree = theKDTreeCache->getTree(fourLayers[0],region,ev,es);
+    const LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
+    const LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
 
     
     /*
