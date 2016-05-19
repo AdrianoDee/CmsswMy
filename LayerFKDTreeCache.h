@@ -61,7 +61,7 @@ public:
           
           buffer.FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
           
-          cache = new *FKDTree<float,3>();
+          cache = new FKDTree<float,3>();
           cache = &buffer;
           theCache.add(key,cache);
           
