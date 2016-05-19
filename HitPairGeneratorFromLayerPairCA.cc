@@ -48,7 +48,9 @@ namespace {
     }
     
       void operator()(const LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
-          /*
+		  
+		  LayerTree* hereTree = tree;
+		  /*
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
           
           //const BarrelDetLayer& layerBarrelGeometry = static_cast<const BarrelDetLayer&>(*innerLayer.detLayer());
@@ -123,7 +125,7 @@ namespace {
           const LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           std::cout<<"LayerPoint Max : done!"<<std::endl;
           
-		  tree->FKDTree::search_in_the_box(minPoint,maxPoint,foundHits);
+		  hereTree->LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
           
           std::cout<<"FKDTree Search : done!"<<std::endl;
           
