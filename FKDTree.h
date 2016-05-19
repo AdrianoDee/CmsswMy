@@ -92,8 +92,7 @@ public:
         thePoints.clear();
         theIndecesToVisit.clear();
     }
-    
-    template<float,3>
+    template<class float, int 3>
     FKDTree(const std::vector<Hit>& hits, GlobalPoint const & origin);
     
     /*

@@ -14,7 +14,7 @@
 #include "DataFormats/TrackerRecHit2D/interface/BaseTrackerRecHit.h"
 #include "TrackingTools/DetLayers/interface/DetLayer.h"
 
-template<float,3>
+template<class float, int 3>
 FKDTree::FKDTree(const std::vector<Hit>& hits, GlobalPoint const & origin) :
 
     theNumberOfPoints(2*hits.size()),
