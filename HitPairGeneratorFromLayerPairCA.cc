@@ -123,7 +123,7 @@ namespace {
           const LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           std::cout<<"LayerPoint Max : done!"<<std::endl;
           
-          tree->LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
+          tree->search_in_the_box(minPoint,maxPoint,foundHits);
           
           std::cout<<"FKDTree Search : done!"<<std::endl;
           

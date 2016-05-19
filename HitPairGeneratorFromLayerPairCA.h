@@ -11,7 +11,7 @@
 class DetLayer;
 class TrackingRegion;
 
-using LayerTree = FKDTree<float,3>;
+using LayerTree =  FKDTree<float,3>;
 using LayerPoint = FKDPoint<float,3>;
 
 class HitPairGeneratorFromLayerPairCA {
