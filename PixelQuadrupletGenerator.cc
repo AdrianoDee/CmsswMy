@@ -267,7 +267,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
                                               const edm::Event& ev, const edm::EventSetup& es,
                                               const SeedingLayerSetsHits::SeedingLayerSet& fourLayers)
 {
-    std::cout<<"PixelQuadruplets CA : in!"<<std::endl;
+    std::cout<<std::endl<<"PixelQuadruplets CA : in!"<<std::endl;
     if (theComparitor) theComparitor->init(ev, es);
     
     HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
