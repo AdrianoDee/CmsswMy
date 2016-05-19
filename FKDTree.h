@@ -90,7 +90,7 @@ public:
         theIndecesToVisit.clear();
     }
     
-    FKDTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
+    FKDTree<TYPE,numberOfDimensions>(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
         
         std::cout<<"Make Tree From Region Layer : in!"<<std::endl;
