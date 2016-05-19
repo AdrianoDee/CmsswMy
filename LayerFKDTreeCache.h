@@ -10,8 +10,8 @@
 #include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 
-//using LayerTree = FKDTree<float,3>;
-using LayerTree = FKDTree;
+using LayerTree = FKDTree<float,3>;
+
 class LayerFKDTreeCache {
 //
 private:
