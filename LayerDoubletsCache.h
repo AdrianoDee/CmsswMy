@@ -63,17 +63,16 @@ public:
         int key = (innerLayer.detLayer()->seqNum()-1)*NUMLAYERS + outerLayer.detLayer()->seqNum();
         assert (key>=0);
         
-        LayerTree * cache = theCache.get(key);
         const HitDoubletsCA* cache = theCache.get(key);
-        const HitDoubletsCA* buffer = new HitDoubletsCA();
-
+        //const HitDoubletsCA* poin = new HitDoubletsCA();
+        //const HitDoubletsCA buffer
         if (cache==nullptr) {
             
             HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
             
-            buffer = &(thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree));
+            HitDoubletsCA buffer = thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree)0;
             std::cout<<"Nullptr : let's do the doublets!"<<std::endl;
-                    
+            
             cache = buffer;
             theCache.add(key,cache);
         }
