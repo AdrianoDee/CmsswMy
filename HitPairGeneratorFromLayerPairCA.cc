@@ -155,15 +155,14 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 }*/
 
 
-void HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
+HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
-                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree, HitDoubletsCA &result) const{
+                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree) {
     
   std::cout<<"Hit Doublets CA Generator : in!  -  ";
-  //HitDoubletsCA result(innerLayer,outerLayer);
+  HitDoubletsCA result(innerLayer,outerLayer);
   //std::cout<<"Results initialised : done!"<<std::endl;
   InnerDeltaPhi deltaPhi(*outerLayer.detLayer(),*innerLayer.detLayer(), reg, es);
-  result.init(innerLayer,outerLayer);
   //std::cout<<"Delta phi : done!"<<std::endl;
   // std::cout << "layers " << theInnerLayer.detLayer()->seqNum()  << " " << outerLayer.detLayer()->seqNum() << std::endl;
   bool rangesDone = false;
@@ -252,7 +251,7 @@ void HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
               edm::LogError("TooManyPairs")<<"number of pairs exceed maximum, no pairs produced";
               delete checkRZ;
 			  std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  ";
-              return;
+              return result;
           }
           result.add(foundHitsInRange[i],io);
       }
@@ -261,5 +260,5 @@ void HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
   result.shrink_to_fit();
-  //return result;
+  return result;
 }
