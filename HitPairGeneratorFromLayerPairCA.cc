@@ -196,7 +196,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 	  if(!rangesDone){
 		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
 			  
-			  Hit const & ihit = innerLayer.hits()[io];
+			  Hit const & ihit = innerLayer.hits()[ii];
 			  auto const & gsInner = static_cast<BaseTrackerRecHit const &>(*ihit).globalState();
 			  auto locInner = gsInner.position-reg.origin().basicVector();
 
