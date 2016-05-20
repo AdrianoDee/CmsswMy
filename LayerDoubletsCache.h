@@ -73,9 +73,7 @@ public:
             
             buffer = &(thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree));
             std::cout<<"Nullptr : let's do the doublets!"<<std::endl;
-            
-            buffer->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
-            
+                    
             cache = buffer;
             theCache.add(key,cache);
         }
