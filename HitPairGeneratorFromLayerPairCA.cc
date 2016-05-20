@@ -215,6 +215,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 			  
 		  }
 		  
+		   std::cout<<"Final range : "<<lowerLimit<<" - "<<upperLimit<<std::endl;
 		  rangesDone = true;
 		  
 		}
