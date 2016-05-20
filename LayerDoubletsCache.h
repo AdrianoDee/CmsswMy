@@ -58,13 +58,37 @@ public:
   void clear() { theCache.clear(); }
     
   //void init(LayerFKDTreeCache* tree) { theTreeCache = std::move(tree); }
-  
-    const HitDoubletsCA &
+    const HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
+        
+        int key = (innerLayer.detLayer()->seqNum()-1)*NUMLAYERS + outerLayer.detLayer()->seqNum();
+        assert (key>=0);
+        
+        LayerTree * cache = theCache.get(key);
+        const HitDoubletsCA* cache = theCache.get(key);
+        const HitDoubletsCA* buffer = new HitDoubletsCA();
+        LayerTree *buffer = new FKDTree<float,3>();
+        if (cache==nullptr) {
+            
+            HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
+            
+            buffer = &(thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree));
+            std::cout<<"Nullptr : let's do the doublets!"<<std::endl;
+            
+            buffer->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
+            
+            cache = buffer;
+            theCache.add(key,cache);
+        }
+        
+        return *cache;}
+    
+    
+    /*const HitDoubletsCA &
     operator()(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
     //const unsigned short int nLayers = layers.size();
     //assert (nLayers == 2, "Error : two layers needed!" );
         
-    int key = (innerLayer.detLayer()->seqNum()-1)*NUMLAYERS + outerLayer.detLayer()->seqNum();
+    
     assert (key>=0);
     const HitDoubletsCA* buffer = theCache.get(key);
     HitDoubletsCA result (innerLayer,outerLayer);
@@ -83,7 +107,7 @@ public:
       LogDebug("LayerDoubletsCache")<<" Doublets for layers"<< outerLayer.detLayer()->seqNum() <<" & "<<innerLayer.detLayer()->seqNum()<<" already in the cache with key: "<<key;
     }
     return *buffer;
-  }
+  }*/
 
     //void init(HitPairGeneratorFromLayerPairCA const & pairGenerator, ) {thePairGenerator = std::move(pairGenerator);}
     

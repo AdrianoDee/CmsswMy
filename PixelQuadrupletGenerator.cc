@@ -297,7 +297,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
     LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
     
-    
+    //TESTING
     std::vector<unsigned int> idS = innerTree.getIdVector();
     
     if(innerTree.empty()) std::cout<<"Tree Empty"<<std::endl;
