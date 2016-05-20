@@ -252,7 +252,7 @@ void HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
               edm::LogError("TooManyPairs")<<"number of pairs exceed maximum, no pairs produced";
               delete checkRZ;
 			  std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  ";
-              return result;
+              return;
           }
           result.add(foundHitsInRange[i],io);
       }
