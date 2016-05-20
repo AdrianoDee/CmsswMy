@@ -58,7 +58,7 @@ public:
   void clear() { theCache.clear(); }
     
   //void init(LayerFKDTreeCache* tree) { theTreeCache = std::move(tree); }
-    const HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree) {
+    const HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
         
         int key = (innerLayer.detLayer()->seqNum()-1)*NUMLAYERS + outerLayer.detLayer()->seqNum();
         assert (key>=0);
