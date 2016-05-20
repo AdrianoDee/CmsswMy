@@ -63,6 +63,7 @@ public:
         int key = (innerLayer.detLayer()->seqNum())*NUMLAYERS + outerLayer.detLayer()->seqNum();
         assert (key>=0);
         const HitDoubletsCA* buffer = theCache.get(key);
+        const HitDoubletsCA* pointer = new HitDoubletsCA(innerLayer,outerLayer);
         HitDoubletsCA result (innerLayer,outerLayer);
         if (buffer==nullptr) {
             
@@ -70,7 +71,8 @@ public:
             
             HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree);
             
-            buffer = &result;
+            pointer = &result;
+            buffer = pointer;
             /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
              theCache.add( key, buffer);
              }
