@@ -261,5 +261,5 @@ void HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
   result.shrink_to_fit();
-  return result;
+  //return result;
 }
