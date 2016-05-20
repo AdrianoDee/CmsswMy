@@ -65,7 +65,7 @@ public:
         
         const HitDoubletsCA* cache = theCache.get(key);
         HitDoubletsCA buffer(innerLayer,outerLayer);
-        const HitDoubletsCA* poin = new HitDoubletsCA();
+        const HitDoubletsCA* poin = new HitDoubletsCA(innerLayer,outerLayer);
         //const HitDoubletsCA buffer
         if (cache==nullptr) {
             
