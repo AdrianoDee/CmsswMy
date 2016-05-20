@@ -39,6 +39,19 @@ public:
     
     Hit const & hit(int i, layer l) const {return layers[l]->hits()[i];}
     
+    HitDoubletsCA& operator=(HitDoubletsCA && other)
+    {
+        
+        if (this != &other)
+        {
+            layers(std::move(other.layers));
+            indeces(std::move(rh.indeces);
+        }
+        return *this;
+        
+    }
+
+    
     float       phi(int i, layer l) const { return layers[l]->hits()[i]->globalState().position.phi();}
     float       r(int i, layer l) const { return layers[l]->hits()[i]->globalState().r;}
     float       eta(int i, layer l) const { return layers[l]->hits()[i]->globalState().position.eta();}
@@ -46,6 +59,7 @@ public:
     float        x(int i, layer l) const { return layers[l]->hits()[i]->globalState().position.x();}
     float        y(int i, layer l) const { return layers[l]->hits()[i]->globalState().position.y();}
     GlobalPoint gp(int i, layer l) const { return GlobalPoint(x(i,l),y(i,l),z(i,l));}
+    
     
 private:
     

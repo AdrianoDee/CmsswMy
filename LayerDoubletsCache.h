@@ -62,23 +62,24 @@ public:
         
         int key = (innerLayer.detLayer()->seqNum()-1)*NUMLAYERS + outerLayer.detLayer()->seqNum();
         assert (key>=0);
-        
-        const HitDoubletsCA* cache = theCache.get(key);
-        HitDoubletsCA buffer(innerLayer,outerLayer);
-        const HitDoubletsCA* poin = new HitDoubletsCA(innerLayer,outerLayer);
-        //const HitDoubletsCA buffer
-        if (cache==nullptr) {
+        const HitDoubletsCA* buffer = theCache.get(key);
+        HitDoubletsCA result (innerLayer,outerLayer);
+        if (buffer==nullptr) {
             
             HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
             
-            buffer = thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree);
-            std::cout<<"Nullptr : let's do the doublets!"<<std::endl;
+            HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree);
             
-            cache = &buffer;
-            theCache.add(key,cache);
-        }
-        
-        return *cache;}
+            buffer = &result;
+            /*LogDebug("LayerHitMapCache")<<" I got"<< lhm->all().second-lhm->all().first<<" hits in the cache for: "<<layer.detLayer();*/
+             theCache.add( key, buffer);
+             }
+             else{
+             // std::cout << region.origin() << " " <<  lhm->theOrigin << std::endl;
+             LogDebug("LayerDoubletsCache")<<" Doublets for layers"<< outerLayer.detLayer()->seqNum() <<" & "<<innerLayer.detLayer()->seqNum()<<" already in the cache with key: "<<key;
+             }
+             return *buffer;
+             }
     
     
     /*const HitDoubletsCA &
