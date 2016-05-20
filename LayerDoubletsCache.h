@@ -34,9 +34,9 @@ private:
     DoubletsCache(unsigned int initSize) : theContainer(initSize, nullptr){}
     ~DoubletsCache() { clear(); }
     void resize(int size) { theContainer.resize(size,nullptr); }
-    const HitDoubletsCA*  get(int key) { return theContainer[key];}
+    HitDoubletsCA*  get(int key) { return theContainer[key];}
     /// add object to cache. It is caller responsibility to check that object is not yet there.
-    void add(int key, const HitDoubletsCA* value) {
+    void add(int key,HitDoubletsCA* value) {
       if (key>=int(theContainer.size())) resize(key+1);
       theContainer[key]=value;
     }
@@ -45,7 +45,7 @@ private:
       for ( auto & v : theContainer)  { delete v; v=nullptr;}
     }
   private:
-    std::vector< const HitDoubletsCA*> theContainer;
+    std::vector< HitDoubletsCA*> theContainer;
   private:
     DoubletsCache(const DoubletsCache &) { }
   };
@@ -58,18 +58,18 @@ public:
   void clear() { theCache.clear(); }
     
   //void init(LayerFKDTreeCache* tree) { theTreeCache = std::move(tree); }
-    const HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
+     HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
         
         int key = (innerLayer.detLayer()->seqNum())*NUMLAYERS + outerLayer.detLayer()->seqNum();
         assert (key>=0);
-        const HitDoubletsCA* buffer = theCache.get(key);
-        const HitDoubletsCA* pointer = new HitDoubletsCA(innerLayer,outerLayer);
+        HitDoubletsCA* buffer = theCache.get(key);
+        HitDoubletsCA* pointer = new HitDoubletsCA(innerLayer,outerLayer);
         HitDoubletsCA result (innerLayer,outerLayer);
         if (buffer==nullptr) {
             
             HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
             
-            HitDoubletsCA result=thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree);
+            thePairGenerator.doublets(region,iE,iS,innerLayer,outerLayer,innerTree,result);
             
             pointer = &result;
             buffer = pointer;

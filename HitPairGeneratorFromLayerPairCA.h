@@ -32,8 +32,8 @@ public:
 
   ~HitPairGeneratorFromLayerPairCA();
 
-  HitDoubletsCA doublets (const TrackingRegion& reg, const edm::Event & ev,  const edm::EventSetup& es,
-                          const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* outerTree)const;
+  void doublets (const TrackingRegion& reg, const edm::Event & ev,  const edm::EventSetup& es,
+                          const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* outerTree,HitDoubletsCA& result)const;
 
   //void hitPairs( const TrackingRegion& reg, OrderedHitPairs & prs,const edm::Event & ev,  const edm::EventSetup& es, Layers layers);
   /*

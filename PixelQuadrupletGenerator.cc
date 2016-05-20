@@ -270,7 +270,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::cout<<std::endl<<"PixelQuadruplets CA : in!"<<std::endl;
     if (theComparitor) theComparitor->init(ev, es);
     
-    HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
+    //HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
     
     //std::vector<FKDTree<float,3>*> layersHitsTree;
     
@@ -318,11 +318,14 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     auto const & albero4 = (theKDTreeCache)(fourLayers[3],region,ev,es); layersHitsTree.push_back(&albero4);
     */
     
-    if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
+    if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO albero!"<<std::endl;
     
-    auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
     std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
-    std::cout<<"CA Doublets : done!"<<std::endl;
+    HitDoubletsCA & doublets1 = theDoubletsCache->getDoublets(fourLayers[0],fourLayers[1],&innerTree,region,ev,es);
+    
+     if (&doublets1 == nullptr) std::cout<<"CAZZOOOOOOO doppio!"<<std::endl;
+    
+        std::cout<<"CA Doublets : done!"<<std::endl;
     std::cout<<doublets1.size()<<" CA doublets found!"<<std::endl;
     for(int j=0;j <(int)doublets1.size();j++){
         std::cout<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
@@ -331,7 +334,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     
     
     
-    auto const & doublets2 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[1],fourLayers[2],&middleTree);
+    HitDoubletsCA & doublets2 = theDoubletsCache->getDoublets(fourLayers[1],fourLayers[2],&middleTree,region,ev,es);
+
     std::cout<<"INNER LAYER :  " <<fourLayers[1].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[2].name()<<std::endl;
     std::cout<<"CA Doublets : done!"<<std::endl;
     std::cout<<doublets2.size()<<" CA doublets found!"<<std::endl;
@@ -339,7 +343,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
         std::cout<<" [ "<<doublets2.innerHitId(j) <<" - "<<doublets2.outerHitId(j)<<" ]  ";
     }
     
-    auto const & doublets3 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[2],fourLayers[3],&outerTree);
+    HitDoubletsCA & doublets3 = theDoubletsCache->getDoublets(fourLayers[2],fourLayers[3],&outerTree,region,ev,es);
     std::cout<<"INNER LAYER :  " <<fourLayers[2].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[3].name()<<std::endl;
     std::cout<<"CA Doublets : done!"<<std::endl;
     std::cout<<doublets3.size()<<" CA doublets found!"<<std::endl;

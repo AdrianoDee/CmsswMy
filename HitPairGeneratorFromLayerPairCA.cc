@@ -155,14 +155,15 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 }*/
 
 
-HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
+void HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
-                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree) const{
+                                                         const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree, HitDoubletsCA &result) const{
     
   std::cout<<"Hit Doublets CA Generator : in!  -  ";
-  HitDoubletsCA result(innerLayer,outerLayer);
+  //HitDoubletsCA result(innerLayer,outerLayer);
   //std::cout<<"Results initialised : done!"<<std::endl;
   InnerDeltaPhi deltaPhi(*outerLayer.detLayer(),*innerLayer.detLayer(), reg, es);
+  result.init(innerLayer,outerLayer);
   //std::cout<<"Delta phi : done!"<<std::endl;
   // std::cout << "layers " << theInnerLayer.detLayer()->seqNum()  << " " << outerLayer.detLayer()->seqNum() << std::endl;
   bool rangesDone = false;
