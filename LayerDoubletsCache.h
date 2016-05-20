@@ -64,7 +64,7 @@ public:
         assert (key>=0);
         
         const HitDoubletsCA* cache = theCache.get(key);
-        const HitDoubletsCA buffer
+        const HitDoubletsCA buffer;
         //const HitDoubletsCA* poin = new HitDoubletsCA();
         //const HitDoubletsCA buffer
         if (cache==nullptr) {
