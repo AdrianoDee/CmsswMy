@@ -58,7 +58,7 @@ public:
   void clear() { theCache.clear(); }
     
   //void init(LayerFKDTreeCache* tree) { theTreeCache = std::move(tree); }
-    const HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
+    const HitDoubletsCA & getDoublets(const SeedingLayerSetsHits::SeedingLayer& innerLayer,const SeedingLayerSetsHits::SeedingLayer& outerLayer,LayerTree * innerTree) {
         
         int key = (innerLayer.detLayer()->seqNum()-1)*NUMLAYERS + outerLayer.detLayer()->seqNum();
         assert (key>=0);
@@ -66,7 +66,7 @@ public:
         LayerTree * cache = theCache.get(key);
         const HitDoubletsCA* cache = theCache.get(key);
         const HitDoubletsCA* buffer = new HitDoubletsCA();
-        LayerTree *buffer = new FKDTree<float,3>();
+
         if (cache==nullptr) {
             
             HitPairGeneratorFromLayerPairCA thePairGenerator(innerLayer.detLayer()->seqNum(),outerLayer.detLayer()->seqNum(),100);
