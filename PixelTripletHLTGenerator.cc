@@ -84,8 +84,8 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
     
     
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
-  const RecHitsSortedInPhi & innerHitsMap = theLayerCache(pairLayers[0], region, ev, es);
-  const RecHitsSortedInPhi& outerHitsMap = theLayerCache(pairLayers[1], region, ev, es);
+  const RecHitsSortedInPhi* innerHitsMap = &(*theLayerCache)(pairLayers[0],region,ev,es);
+  const RecHitsSortedInPhi* outerHitsMap = &(*theLayerCache)(pairLayers[1],region,ev,es);
     
   std::cout<<"INNER LAYER :  " <<pairLayers[0].name()<<"    "<<"OUTER LAYER :  " <<pairLayers[1].name()<<std::endl;  
   std::cout<<"Legacy Doublets : done!"<<std::endl;
