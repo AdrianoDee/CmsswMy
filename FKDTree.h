@@ -319,6 +319,10 @@ public:
                 if (intersection && is_in_the_box(index, minPoint, maxPoint)){
                     foundPoints.emplace_back(theIds.at(index));
                     std::cout<<"Point emplaced back : "<<index<<std::endl;
+                    for (int i = 0; i < numberOfDimensions; ++i)
+                    {
+                        std::cout<<"Dimension "<<i<<" : "<<theDimensions[i][index]<<std::endl;
+                    }
                 }
                 
                 bool isLowerThanBoxMin = theDimensions[dimension][index]

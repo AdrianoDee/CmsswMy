@@ -109,20 +109,20 @@ namespace {
 			  
           }
 		   
-          std::cout<<"Rs & Zs : done!"<<std::endl;
-          std::cout<<"Phi min : "<<phiRange.min()<<std::endl;
-          std::cout<<"Phi max : "<<phiRange.max()<<std::endl;
-          std::cout<<"r min : "<<rmin<<std::endl;
-          std::cout<<"r max : "<<rmax<<std::endl;
-          std::cout<<"z min : "<<zmin<<std::endl;
-          std::cout<<"z max : "<<zmax<<std::endl;
+          //std::cout<<"Rs & Zs : done!"<<std::endl;
+          //std::cout<<"Phi min : "<<phiRange.min()<<std::endl;
+          //std::cout<<"Phi max : "<<phiRange.max()<<std::endl;
+          //std::cout<<"r min : "<<rmin<<std::endl;
+          //std::cout<<"r max : "<<rmax<<std::endl;
+          //std::cout<<"z min : "<<zmin<<std::endl;
+          //std::cout<<"z max : "<<zmax<<std::endl;
 		   
 		  
           const LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
           //LayerPoint minPoint(-10000,-10000,-10000,0);
-          std::cout<<"LayerPoint Min : done!"<<std::endl;
+          //std::cout<<"LayerPoint Min : done!"<<std::endl;
           const LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
-          std::cout<<"LayerPoint Max : done!"<<std::endl;
+          //std::cout<<"LayerPoint Max : done!"<<std::endl;
           
 		  tree->LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
           
@@ -180,7 +180,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     float oY = gs.position.y();
     float oZ = gs.position.z();
     float oRv = loc.perp();
-      
+	std::cout<<"Hit : "<<oX<<" - "<<oY<<" - "<<oZ<<std::endl;
     float oDrphi = gs.errorRPhi;
     float oDr = gs.errorR;
     float oDz = gs.errorZ;
@@ -210,8 +210,8 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 			  lowerLimit = std::min(bufferrange.max(),lowerLimit);
 			  lowerLimit = std::min(bufferrange.min(),lowerLimit);
 			  
-			  std::cout<<"At : "<<uInner<<" - ";
-			  std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
+			  //std::cout<<"At : "<<uInner<<" - ";
+			  //std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
 			  
 		  }
 		  
@@ -223,7 +223,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 	
 	
 	Range rangeSearch(lowerLimit,upperLimit);
-    std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
+    //std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
     Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
       
     std::vector<unsigned int> foundHitsInRange;
@@ -231,12 +231,10 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 	  
       switch (checkRZ->algo()) {
           case (HitRZCompatibility::zAlgo) :
-              std::cout<<" -  HitRZ Check : zAlgo!"<<"("<<io<<")  ";
               std::get<0>(kernels).set(checkRZ);
               std::get<0>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,rangeSearch);
               break;
           case (HitRZCompatibility::rAlgo) :
-              std::cout<<"  -  HitRZ Check : rAlgo!"<<"("<<io<<")  ";
               std::get<1>(kernels).set(checkRZ);
               std::get<1>(kernels)(innerTree,innerLayer,phiRange,foundHitsInRange,rangeSearch);
               break;
@@ -251,12 +249,11 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
               result.clear();
               edm::LogError("TooManyPairs")<<"number of pairs exceed maximum, no pairs produced";
               delete checkRZ;
-			  std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  ";
               return result;
           }
           result.add(foundHitsInRange[i],io);
       }
-	  delete checkRZ; std::cout<<"  -  CheckRX : deleted!"<<"("<<io<<")  "<<std::endl;
+	  delete checkRZ;
   
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
