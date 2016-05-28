@@ -343,8 +343,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     cadoublets<<"====== "<<doublets1.size()<<" CA doublets found!"<<std::endl;
 
     for(int j=0;j <(int)doublets1.size();j++){
-      Hit const & innerHit = hits0[i]->hit();
-      Hit const & outerHit = hits1[i]->hit();
+      Hit const & innerHit = hits0[j]->hit();
+      Hit const & outerHit = hits1[j]->hit();
       auto const & gsInner = innerHit->globalState();
       auto const & gsOuter = outerHit->globalState();
       auto locInner = gsInner.position-region.origin().basicVector();
