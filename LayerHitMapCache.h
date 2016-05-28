@@ -12,7 +12,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <fstream>
 
 class LayerHitMapCache {
 
@@ -52,7 +51,7 @@ public:
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
 	     const edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
-         ofstream layerHits("Txts/layerHits.txt");
+         std::ofstream layerHits("Txts/layerHits.txt");
          layerHits<<"========================== Layer "<<layer.name()<<" ====================="<<std::enld;
     int key = layer.index();
     assert (key>=0);

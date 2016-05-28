@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <fstream> 
 
 RecHitsSortedInPhi::RecHitsSortedInPhi(const std::vector<Hit>& hits, GlobalPoint const & origin, DetLayer const * il) :
   layer(il),
@@ -24,7 +23,7 @@ RecHitsSortedInPhi::RecHitsSortedInPhi(const std::vector<Hit>& hits, GlobalPoint
   for (auto const & hp : hits) theHits.emplace_back(hp);
 
   std::sort( theHits.begin(), theHits.end(), HitLessPhi());
-  ofstream layerHits("Txts/layerHits.txt");
+  std::ofstream layerHits("Txts/layerHits.txt");
   layerHits<<"============================================================"<<std::enld;
   for (unsigned int i=0; i!=theHits.size(); ++i) {
     auto const & h = *theHits[i].hit();

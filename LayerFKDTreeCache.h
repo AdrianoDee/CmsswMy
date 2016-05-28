@@ -13,7 +13,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <fstream> 
 
 
 using LayerTree = FKDTree<float,3>;
