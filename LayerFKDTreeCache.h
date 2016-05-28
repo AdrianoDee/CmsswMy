@@ -57,7 +57,7 @@ public:
 
    LayerTree & getTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
 
-      ofstream treeHits("Txts/treeHits.txt");
+      std::ofstream treeHits("Txts/treeHits.txt");
       layerHits<<"========================== Layer "<<layer.name()<<" ====================="<<std::enld;
 
       int key = layer.index();
