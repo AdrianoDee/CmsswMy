@@ -114,7 +114,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
         auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
 
-          legacy<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
+          legacy<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
           legacy<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
     }
 
