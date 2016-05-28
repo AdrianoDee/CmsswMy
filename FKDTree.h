@@ -588,7 +588,7 @@ public:
             float lr = loc.perp();
             auto phi = gs.position.barePhi();
             auto z = gs.position.z();
-            //auto r = gs.r;
+            auto r = gs.r;
             auto x = gs.position.x();
             auto y = gs.position.y();
 
