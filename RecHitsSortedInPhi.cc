@@ -24,7 +24,7 @@ RecHitsSortedInPhi::RecHitsSortedInPhi(const std::vector<Hit>& hits, GlobalPoint
 
   std::sort( theHits.begin(), theHits.end(), HitLessPhi());
   std::ofstream layerHits("Txts/layerHits.txt");
-  layerHits<<"============================================================"<<std::enld;
+  layerHits<<"============================================================"<<std::endl;
   for (unsigned int i=0; i!=theHits.size(); ++i) {
     auto const & h = *theHits[i].hit();
     auto const & gs = static_cast<BaseTrackerRecHit const &>(h).globalState();

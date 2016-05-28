@@ -52,7 +52,7 @@ public:
 	     const edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
          std::ofstream layerHits("Txts/layerHits.txt");
-         layerHits<<"========================== Layer "<<layer.name()<<" ====================="<<std::enld;
+         layerHits<<"========================== Layer "<<layer.name()<<" ====================="<<std::endl;
     int key = layer.index();
     assert (key>=0);
     const RecHitsSortedInPhi * lhm = theCache.get(key);
