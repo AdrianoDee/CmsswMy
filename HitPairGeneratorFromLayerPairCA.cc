@@ -46,18 +46,18 @@ namespace {
       assert( a->algo()==Algo::me);
       checkRZ=reinterpret_cast<Algo const *>(a);
     }
-    
+
       void operator()(LayerTree* tree,const SeedingLayerSetsHits::SeedingLayer& innerLayer,const PixelRecoRange<float>& phiRange,std::vector<unsigned int>& foundHits,Range searchRange) const {
-		  
+
 		  /*
           constexpr float nSigmaRZ = 3.46410161514f; // std::sqrt(12.f);
-          
+
           //const BarrelDetLayer& layerBarrelGeometry = static_cast<const BarrelDetLayer&>(*innerLayer.detLayer());
-          
+
           //std::cout<<"BarrelDet : done!"<<std::endl;
-          
+
           float vErr = 0.0;
-          
+
           for(auto hit : innerLayer.hits()){
               auto const & gs = static_cast<BaseTrackerRecHit const &>(*hit).globalState();
               auto dv = innerLayer.detLayer()->isBarrel() ? gs.errorZ : gs.errorR;
@@ -73,10 +73,10 @@ namespace {
           auto u = innerLayer.detLayer()->isBarrel() ? uLayer : innerLayer.detLayer()->position().z(); //BARREL? Raggio //FWD? z
 		  thickness *= (u)/(std::fabs(u));
           std::cout<<"U & thickness : done! "<<u<<" - "<<thickness<<std::endl;
-		 
+
           Range upperRange = checkRZ->range(u+thickness);
           Range lowerRange = checkRZ->range(u-thickness);
-		  
+
 		  std::cout<<"Lower at "<<u+thickness<<std::endl;
 		  std::cout<<lowerRange.min()<<" - "<<lowerRange.max()<<std::endl;
 		  std::cout<<"Upper at "<<u-thickness<<std::endl;
@@ -89,49 +89,49 @@ namespace {
               zmin = -std::max(-upperRange.min(),-lowerRange.min());
 			  rmax = 1000;//+(u+thickness+vErr;
 			  rmin = -1000;//u-thickness-vErr;*/
-			  
+
 			  zmax = searchRange.max();
 			  zmin = searchRange.min();
 			  rmax = 1000;//+(u+thickness+vErr;
 			  rmin = -1000;//u-thickness-vErr;
-			  
+
           }else{
               /*
               rmax = std::max(upperRange.max(),lowerRange.max());
               rmin = -std::max(-upperRange.min(),-lowerRange.min());
 			  zmin = -1000;//u+thickness+vErr;
 			  zmax = 1000;//u-thickness-vErr;*/
-			  
+
 			  rmax = searchRange.max();
 			  rmin = searchRange.min();
 			  zmin = -1000;//u+thickness+vErr;
 			  zmax = 1000;//u-thickness-vErr;
-			  
+
           }
-		   
+
           //std::cout<<"Rs & Zs : done!"<<std::endl;
           //std::cout<<"Phi min : "<<phiRange.min()<<std::endl;
           //std::cout<<"Phi max : "<<phiRange.max()<<std::endl;
-          //std::cout<<"r min : "<<rmin<<std::endl;
-          //std::cout<<"r max : "<<rmax<<std::endl;
-          //std::cout<<"z min : "<<zmin<<std::endl;
-          //std::cout<<"z max : "<<zmax<<std::endl;
-		   
-		  
+          std::cout<<"r min : "<<rmin<<std::endl;
+          std::cout<<"r max : "<<rmax<<std::endl;
+          std::cout<<"z min : "<<zmin<<std::endl;
+          std::cout<<"z max : "<<zmax<<std::endl;
+
+
           const LayerPoint minPoint(phiRange.min(),zmin,rmin,0);
           //LayerPoint minPoint(-10000,-10000,-10000,0);
           //std::cout<<"LayerPoint Min : done!"<<std::endl;
           const LayerPoint maxPoint(phiRange.max(),zmax,rmax,100000);
           //std::cout<<"LayerPoint Max : done!"<<std::endl;
-          
+
 		  tree->LayerTree::search_in_the_box(minPoint,maxPoint,foundHits);
-          
+
           std::cout<<"FKDTree Search : done!"<<std::endl;
-          
+
       }
-    
+
     Algo const * checkRZ;
-    
+
   };
 
 
@@ -158,7 +158,7 @@ void HitPairGeneratorFromLayerPair::hitPairs(
 HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& reg,
                                                          const edm::Event & ev,  const edm::EventSetup& es,const SeedingLayerSetsHits::SeedingLayer& innerLayer,
                                                          const SeedingLayerSetsHits::SeedingLayer& outerLayer, LayerTree* innerTree) {
-    
+
   std::cout<<"Hit Doublets CA Generator : in!  -  ";
   HitDoubletsCA result(innerLayer,outerLayer);
   //std::cout<<"Results initialised : done!"<<std::endl;
@@ -168,14 +168,14 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
   bool rangesDone = false;
   float upperLimit = -10000;
   float lowerLimit = 10000;
-	
+
   constexpr float nSigmaPhi = 3.f;
   for (int io = 0; io!=int(outerLayer.hits().size()); ++io) {
     std::cout<<"  Outer hit cylce : in!("<<io<<")"<<std::endl;
     Hit const & ohit = outerLayer.hits()[io];
     auto const & gs = static_cast<BaseTrackerRecHit const &>(*ohit).globalState();
     auto loc = gs.position-reg.origin().basicVector();
-      
+
     float oX = gs.position.x();
     float oY = gs.position.y();
     float oZ = gs.position.z();
@@ -186,49 +186,49 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     float oDz = gs.errorZ;
     //std::cout<<"Outer Hit""Parameters : done!"<<"("<<io<<")"<<std::endl;
     if (!deltaPhi.prefilter(oX,oY)) continue;
-      
+
     PixelRecoRange<float> phiRange = deltaPhi(oX,oY,oZ,nSigmaPhi*oDrphi);
 
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
     if(!checkRZ) continue;
-	  
-	 
+
+
 	  if(!rangesDone){
 		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
-			  
+
 			  Hit const & ihit = innerLayer.hits()[ii];
 			  auto const & gsInner = static_cast<BaseTrackerRecHit const &>(*ihit).globalState();
 			  auto locInner = gsInner.position-reg.origin().basicVector();
 
 			  auto uInner = innerLayer.detLayer()->isBarrel() ? locInner.perp() : gsInner.position.z();
-			  
+
 			  Range bufferrange = checkRZ->range(uInner);
-			  
+
 			  upperLimit = std::max(bufferrange.min(),upperLimit);
 			  upperLimit = std::max(bufferrange.max(),upperLimit);
-			  
+
 			  lowerLimit = std::min(bufferrange.max(),lowerLimit);
 			  lowerLimit = std::min(bufferrange.min(),lowerLimit);
-			  
-			  //std::cout<<"At : "<<uInner<<" - ";
-			  //std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
-			  
+
+			  std::cout<<"At : "<<uInner<<" - ";
+			  std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
+
 		  }
-		  
+
 		   std::cout<<"Final range : "<<lowerLimit<<" - "<<upperLimit<<std::endl;
 		  rangesDone = true;
-		  
+
 		}
-	  
-	
-	
+
+
+
 	Range rangeSearch(lowerLimit,upperLimit);
     //std::cout<<"  -  HitRZ Check : done!"<<"("<<io<<")   ";
     Kernels<HitZCheck,HitRCheck,HitEtaCheck> kernels;
-      
+
     std::vector<unsigned int> foundHitsInRange;
-	
-	  
+
+
       switch (checkRZ->algo()) {
           case (HitRZCompatibility::zAlgo) :
               std::get<0>(kernels).set(checkRZ);
@@ -254,7 +254,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
           result.add(foundHitsInRange[i],io);
       }
 	  delete checkRZ;
-  
+
   }
   LogDebug("HitPairGeneratorFromLayerPairCA")<<" total number of pairs provided back: "<<result.size();
   result.shrink_to_fit();

@@ -10,6 +10,11 @@
 #include "TrackingTools/TransientTrackingRecHit/interface/SeedingLayerSetsHits.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+
 using LayerTree = FKDTree<float,3>;
 
 class LayerFKDTreeCache {
@@ -29,7 +34,7 @@ private:
       theContainer[key]=value;
     }
     /// emptify cache, delete values associated to Key
-    void clear() {      
+    void clear() {
       for ( auto & v : theContainer)  { delete v; v=nullptr;}
     }
   private:
@@ -49,22 +54,25 @@ public:
         if(checkCache(key)) tree = theCache.get(key);
     }*/
   //void writeCache(int key,LayerTree* tree) {theCache.add(key,tree);}
-  
+
    LayerTree & getTree(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iE, const edm::EventSetup & iS) {
-      
+
+      ofstream treeHits("Txts/treeHits.txt");
+      layerHits<<"========================== Layer "<<layer.name()<<" ====================="<<std::enld;
+
       int key = layer.index();
       assert (key>=0);
-      
+
       LayerTree * cache = theCache.get(key);
       LayerTree *buffer = new FKDTree<float,3>();
       if (cache==nullptr) {
-          
+
           std::cout<<"Nullptr : let's do the tree!"<<std::endl;
           buffer->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
-          
+
           cache = buffer;
           theCache.add(key,cache);
-          
+
       }
 
       return *cache;}
@@ -89,8 +97,7 @@ public:
   }*/
 
 private:
-  Cache theCache; 
+  Cache theCache;
 };
 
 #endif
-

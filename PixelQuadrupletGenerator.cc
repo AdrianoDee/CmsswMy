@@ -297,6 +297,10 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
     LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
     
+    for (int j=0; j<4; j++) {
+        if(fourLayers[j]) std::cout<<fourLayers[j].hits()[61]->globalState().r;
+    }
+   
     //TESTING
     std::vector<unsigned int> idS = innerTree.getIdVector();
     
@@ -347,6 +351,11 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     for(int j=0;j <(int)doublets3.size();j++){
         std::cout<<" [ "<<doublets3.innerHitId(j) <<" - "<<doublets3.outerHitId(j)<<" ]  ";
     }
+    
+    std::cout<<"ZETA QUI -----"<<std::endl;
+    std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
+    std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
+    std::cout<<doublets3.z(0,HitDoubletsCA::inner)<<std::endl;
     
     //std::vector<HitDoubletsCA> layersDoublets;
     
