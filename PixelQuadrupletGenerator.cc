@@ -376,6 +376,44 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
         std::cout<<" [ "<<doublets3.innerHitId(j) <<" - "<<doublets3.outerHitId(j)<<" ]  ";
     }
 
+    cadoublets<<"==========================["<<fourLayers[1].name()<<" - "<<fourLayers[2].name()<<"]=========================="<<std::endl;
+    cadoublets<<"====== "<<doublets2.size()<<" CA doublets found!"<<std::endl;
+
+    for(int j=0;j <(int)doublets2.size();j++){
+      Hit const & innerHit = hits1[doublets2.innerHitId(j)]->hit();
+      Hit const & outerHit = hits2[doublets2.outerHitId(j)]->hit();
+      auto const & gsInner = innerHit->globalState();
+      auto const & gsOuter = outerHit->globalState();
+      //auto locInner = gsInner.position-region.origin().basicVector();
+      //auto locOuter = gsOuter.position-region.origin().basicVector();
+
+      auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
+      auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
+      auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
+
+        cadoublets<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
+        cadoublets<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
+    }
+
+    cadoublets<<"==========================["<<fourLayers[2].name()<<" - "<<fourLayers[3].name()<<"]=========================="<<std::endl;
+    cadoublets<<"====== "<<doublets3.size()<<" CA doublets found!"<<std::endl;
+
+    for(int j=0;j <(int)doublets3.size();j++){
+      Hit const & innerHit = hits2[doublets3.innerHitId(j)]->hit();
+      Hit const & outerHit = hits3[doublets3.outerHitId(j)]->hit();
+      auto const & gsInner = innerHit->globalState();
+      auto const & gsOuter = outerHit->globalState();
+      //auto locInner = gsInner.position-region.origin().basicVector();
+      //auto locOuter = gsOuter.position-region.origin().basicVector();
+
+      auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
+      auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
+      auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
+
+        cadoublets<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
+        cadoublets<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
+    }
+
     std::cout<<"ZETA QUI -----"<<std::endl;
     std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
     std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
