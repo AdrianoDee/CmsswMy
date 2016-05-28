@@ -329,13 +329,33 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
 
     //if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
 
+    std::vector<Hit> hits0 = region.hits(ev,es,fourLayers[0]);
+    std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
+    std::vector<Hit> hits2 = region.hits(ev,es,fourLayers[2]);
+    std::vector<Hit> hits3 = region.hits(ev,es,fourLayers[3]);
 
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
-    std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
-    std::cout<<"CA Doublets : done!"<<std::endl;
-    std::cout<<doublets1.size()<<" CA doublets found!"<<std::endl;
+    //std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
+    //std::cout<<"CA Doublets : done!"<<std::endl;
+    //std::cout<<doublets1.size()<<" CA doublets found!"<<std::endl;
+
+    cadoublets<<"==========================["<<fourLayers[0].name()<<" - "<<fourLayers[1].name()<<"]=========================="<<std::endl;
+    cadoublets<<"====== "<<doublets1.size()<<" CA doublets found!"<<std::endl;
+
     for(int j=0;j <(int)doublets1.size();j++){
-        std::cout<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
+      Hit const & innerHit = hits0[i]->hit();
+      Hit const & outerHit = hits1[i]->hit();
+      auto const & gsInner = innerHit->globalState();
+      auto const & gsOuter = outerHit->globalState();
+      auto locInner = gsInner.position-region.origin().basicVector();
+      auto locOuter = gsOuter.position-region.origin().basicVector();
+
+      auto zI = gs.position.z(); auto zO = gs.position.z();
+      auto xI = gs.position.x(); auto xO = gs.position.x();
+      auto yI = gs.position.y(); auto yO = gs.position.y();
+
+        cadoublets<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
+        cadoublets<<"[ ("<<xI<<";"<<yI<<";"<<zI<<")"<<"("<<xO<<";"<<yO<<";"<<zO<<") ]"<<std::endl;
     }
 
 
