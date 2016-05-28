@@ -347,8 +347,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
       Hit const & outerHit = hits1[j]->hit();
       auto const & gsInner = innerHit->globalState();
       auto const & gsOuter = outerHit->globalState();
-      auto locInner = gsInner.position-region.origin().basicVector();
-      auto locOuter = gsOuter.position-region.origin().basicVector();
+      //auto locInner = gsInner.position-region.origin().basicVector();
+      //auto locOuter = gsOuter.position-region.origin().basicVector();
 
       auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
       auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
