@@ -51,7 +51,7 @@ public:
   operator()(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region,
 	     const edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
-         std::ofstream layerHits("Txts/layerHits.txt");
+         std::ofstream layerHits("Txts/layerHits.txt",std::ofstream::app);
          layerHits<<"========================== Layer "<<layer.name()<<" ====================="<<std::endl;
     int key = layer.index();
     assert (key>=0);

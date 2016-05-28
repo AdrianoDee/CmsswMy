@@ -569,7 +569,7 @@ public:
 
     void make_FKDTreeFromRegionLayer(const SeedingLayerSetsHits::SeedingLayer& layer, const TrackingRegion & region, const edm::Event & iEvent, const edm::EventSetup & iSetup)
     {
-        std::ofstream treeHits("Txts/treeHits.txt");
+        std::ofstream treeHits("Txts/treeHits.txt",std::ofstream::app);
 
         std::cout<<"Make Tree From Region Layer : in!"<<std::endl;
         static_assert( numberOfDimensions == 3, "Only for 3-dim trees!" );

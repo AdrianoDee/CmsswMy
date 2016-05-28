@@ -23,7 +23,7 @@ RecHitsSortedInPhi::RecHitsSortedInPhi(const std::vector<Hit>& hits, GlobalPoint
   for (auto const & hp : hits) theHits.emplace_back(hp);
 
   std::sort( theHits.begin(), theHits.end(), HitLessPhi());
-  std::ofstream layerHits("Txts/layerHits.txt");
+  std::ofstream layerHits("Txts/layerHits.txt",std::ofstream::app);
   layerHits<<"============================================================"<<std::endl;
   for (unsigned int i=0; i!=theHits.size(); ++i) {
     auto const & h = *theHits[i].hit();
