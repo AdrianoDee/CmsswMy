@@ -584,7 +584,7 @@ public:
         for (int i = 0; i!=(int)hits.size(); i++) {
             Hit const & hit = hits[i]->hit();
             auto const & gs = hit->globalState();
-            auto loc = gs.position-origin.basicVector();
+            auto loc = gs.position-region.origin().basicVector();
             float lr = loc.perp();
             auto phi = gs.position.barePhi();
             auto z = gs.position.z();
@@ -600,7 +600,7 @@ public:
             if (phi>safePhi) {points.push_back(make_FKDPoint(phi-Geom::ftwoPi(),z,r,i));}
             else if (phi<-safePhi) {points.push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,r,i));}
 
-            layerHits<<" Hit "<<i<<" x = "<<x<<" y = "<<y<<" z = "<<z[i]<<" r = "<<lr<<" phi = "<<phi<<std::endl;
+            treeHits<<" Hit "<<i<<" x = "<<x<<" y = "<<y<<" z = "<<z[i]<<" r = "<<lr<<" phi = "<<phi<<std::endl;
 
         }
         std::cout<<"Point array: done!"<<std::endl;
