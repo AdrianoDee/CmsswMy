@@ -23,6 +23,10 @@
 
 #include "FWCore/Utilities/interface/isFinite.h"
 
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
 namespace {
     template <typename T>
     T sqr(T x) {
@@ -268,6 +272,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
                                               const SeedingLayerSetsHits::SeedingLayerSet& fourLayers)
 {
     std::cout<<std::endl<<"PixelQuadruplets CA : in!"<<std::endl;
+    std::ofstream cadoublets("Txts/cadoublets.txt",std::ofstream::app);
     if (theComparitor) theComparitor->init(ev, es);
 
     HitPairGeneratorFromLayerPairCA caDoubletsGenerator(0,1,10000);
@@ -322,7 +327,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     auto const & albero4 = (theKDTreeCache)(fourLayers[3],region,ev,es); layersHitsTree.push_back(&albero4);
     */
 
-    if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
+    //if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
 
 
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
@@ -332,7 +337,6 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     for(int j=0;j <(int)doublets1.size();j++){
         std::cout<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
     }
-
 
 
 

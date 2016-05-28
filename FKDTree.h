@@ -588,17 +588,17 @@ public:
             float lr = loc.perp();
             auto phi = gs.position.barePhi();
             auto z = gs.position.z();
-            auto r = gs.r;
+            //auto r = gs.r;
             auto x = gs.position.x();
             auto y = gs.position.y();
 
 
             std::cout<<"Make Point? - Phi = "<<phi<<" Z = "<<z<<" R = "<<r<<std::endl;
-            points.push_back(make_FKDPoint(phi,z,r,i));
+            points.push_back(make_FKDPoint(phi,z,lr,i));
             std::cout<<"Made!"<<std::endl;
             std::cout<<"Point : "<<points[i][0]<<" - "<<points[i][0]<<" - "<<points[i][1]<<" - "<<points[i][2]<<std::endl;
-            if (phi>safePhi) {points.push_back(make_FKDPoint(phi-Geom::ftwoPi(),z,r,i));}
-            else if (phi<-safePhi) {points.push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,r,i));}
+            if (phi>safePhi) {points.push_back(make_FKDPoint(phi-Geom::ftwoPi(),z,lr,i));}
+            else if (phi<-safePhi) {points.push_back(make_FKDPoint(phi+Geom::ftwoPi(),z,lr,i));}
 
             treeHits<<" Hit "<<i<<" x = "<<x<<" y = "<<y<<" z = "<<z<<" r = "<<lr<<" phi = "<<phi<<std::endl;
 
