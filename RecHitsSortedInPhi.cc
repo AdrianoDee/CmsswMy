@@ -46,7 +46,7 @@ RecHitsSortedInPhi::RecHitsSortedInPhi(const std::vector<Hit>& hits, GlobalPoint
     dv[i] = isBarrel ? dz : dr;
     lphi[i] = loc.barePhi();
 
-    layerHits<<" Hit "<<i<<" x = "<<x[i]<<" y = "<<y[i]<<" z = "<<z[i]<<" lr = "<<lr<<" r = "<<gs.r<<" phi = "<<lphi<<std::endl;
+    layerHits<<" Hit "<<i<<" x = "<<x[i]<<" y = "<<y[i]<<" z = "<<z[i]<<" lr = "<<lr<<" r = "<<gs.r<<" phi = "<<lphi[i]<<std::endl;
   }
 
 }
