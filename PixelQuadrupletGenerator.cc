@@ -339,7 +339,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
 
     for(int j=0;j <(int)n;j++){
       Hit const & hit = hits0[j]->hit();
-      Hit const & phiHit = hit0phi[y[j]]->hit();
+      Hit const & phiHit = hit0phi[sortedIndeces0[j]]->hit();
       auto const & gsHit = hit->globalState();
       auto const & gsPhi = phiHit->globalState();
       //auto locInner = gsInner.position-region.origin().basicVector();
