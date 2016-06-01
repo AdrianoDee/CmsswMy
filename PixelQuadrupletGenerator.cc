@@ -349,7 +349,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
       auto xI = gsHit.position.x(); auto xO = gsPhi.position.x();
       auto yI = gsHit.position.y(); auto yO = gsPhi.position.y();
 
-      std::cout<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
+      std::cout<<"[ NoPhi : ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<" Phi : ("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
 
     }
 
