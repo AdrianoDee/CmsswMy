@@ -330,7 +330,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     //if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
 
     std::vector<Hit> hits0 = region.hits(ev,es,fourLayers[0]);
-    std::vector<HitWithPhi> hit0phi;
+    std::vector<RecHitsSortedInPhi::HitWithPhi> hit0phi;
     std::vector<int> sortedIndeces0(hits0.size());
     std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
     std::vector<int> sortedIndeces1(hits0.size());
