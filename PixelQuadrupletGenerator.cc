@@ -335,7 +335,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     for (auto const & hp : hits0) hit0phi.emplace_back(hp);
     std::vector<int> sortedIndeces0(hits0.size());
     std::generate(std::begin(sortedIndeces0), std::end(sortedIndeces0), [&]{ return n++; });
-    std::sort( std::begin(sortedIndeces0),std::end(sortedIndeces0),[&](int i1, int i2) { return RecHitsSortedInPhi::HitLessPhi(t0phi[i1],hit0phi[i2]); } );
+    std::sort( std::begin(sortedIndeces0),std::end(sortedIndeces0),[&](int i1, int i2) { return RecHitsSortedInPhi::HitLessPhi(ht0phi[i1],hit0phi[i2]); } );
     std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit1phi;
     for (auto const & hp : hits1) hit1phi.emplace_back(hp);
