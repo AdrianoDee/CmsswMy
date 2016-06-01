@@ -331,12 +331,19 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
 
     std::vector<Hit> hits0 = region.hits(ev,es,fourLayers[0]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit0phi;
+    for (auto const & hp : hits0) hit0phi.emplace_back(hp);
     std::vector<int> sortedIndeces0(hits0.size());
     std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
+    for (auto const & hp : hits1) hit1phi.emplace_back(hp);
+    std::vector<RecHitsSortedInPhi::HitWithPhi> hit1phi;
     std::vector<int> sortedIndeces1(hits0.size());
     std::vector<Hit> hits2 = region.hits(ev,es,fourLayers[2]);
+    for (auto const & hp : hits2) hit2phi.emplace_back(hp);
+    std::vector<RecHitsSortedInPhi::HitWithPhi> hit2phi;
     std::vector<int> sortedIndeces2(hits0.size());
     std::vector<Hit> hits3 = region.hits(ev,es,fourLayers[3]);
+    for (auto const & hp : hits3) hit3phi.emplace_back(hp);
+    std::vector<RecHitsSortedInPhi::HitWithPhi> hit3phi;
     std::vector<int> sortedIndeces3(hits0.size());
 
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
