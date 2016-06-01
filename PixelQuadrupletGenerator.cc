@@ -345,9 +345,9 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
       //auto locInner = gsInner.position-region.origin().basicVector();
       //auto locOuter = gsOuter.position-region.origin().basicVector();
 
-      auto zI = gsHit.position.z(); auto zO = phiHit.position.z();
-      auto xI = gsHit.position.x(); auto xO = phiHit.position.x();
-      auto yI = gsHit.position.y(); auto yO = phiHit.position.y();
+      auto zI = gsHit.position.z(); auto zO = gsPhi.position.z();
+      auto xI = gsHit.position.x(); auto xO = gsPhi.position.x();
+      auto yI = gsHit.position.y(); auto yO = gsPhi.position.y();
 
       std::cout<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
 
