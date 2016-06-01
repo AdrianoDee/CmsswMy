@@ -415,9 +415,9 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     }
 
     std::cout<<"ZETA QUI -----"<<std::endl;
-    std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
-    std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
-    std::cout<<doublets3.z(0,HitDoubletsCA::inner)<<std::endl;
+    //std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
+    //std::cout<<doublets1.z(0,HitDoubletsCA::inner)<<std::endl;
+    //std::cout<<doublets3.z(0,HitDoubletsCA::inner)<<std::endl;
 
     //std::vector<HitDoubletsCA> layersDoublets;
 
