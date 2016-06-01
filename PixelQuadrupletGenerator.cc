@@ -330,9 +330,14 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     //if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
 
     std::vector<Hit> hits0 = region.hits(ev,es,fourLayers[0]);
+    std::vector<HitWithPhi> hit0phi;
+    std::vector<int> sortedIndeces0(hits0.size());
     std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
+    std::vector<int> sortedIndeces1(hits0.size());
     std::vector<Hit> hits2 = region.hits(ev,es,fourLayers[2]);
+    std::vector<int> sortedIndeces2(hits0.size());
     std::vector<Hit> hits3 = region.hits(ev,es,fourLayers[3]);
+    std::vector<int> sortedIndeces3(hits0.size());
 
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
     //std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
