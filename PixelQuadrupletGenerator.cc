@@ -336,6 +336,23 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::vector<int> sortedIndeces0(hits0.size());
     std::generate(std::begin(sortedIndeces0), std::end(sortedIndeces0), [&]{ return n++; });
     std::sort( std::begin(sortedIndeces0),std::end(sortedIndeces0),[&](int i1, int i2) { return hit0phi[i1].phi()<hit0phi[i2].phi(); } );
+
+    for(int j=0;j <(int)n;j++){
+      Hit const & hit = hits0[j]->hit();
+      Hit const & phiHit = hit0phi[y[j]]->hit();
+      auto const & gsHit = hit->globalState();
+      auto const & gsPhi = phiHit->globalState();
+      //auto locInner = gsInner.position-region.origin().basicVector();
+      //auto locOuter = gsOuter.position-region.origin().basicVector();
+
+      auto zI = gsHit.position.z(); auto zO = phiHit.position.z();
+      auto xI = gsHit.position.x(); auto xO = phiHit.position.x();
+      auto yI = gsHit.position.y(); auto yO = phiHit.position.y();
+
+      std::cout<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
+
+    }
+
     std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit1phi;
     for (auto const & hp : hits1) hit1phi.emplace_back(hp);
