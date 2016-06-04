@@ -336,7 +336,8 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::vector<int> sortedIndeces0(hits0.size());
     std::generate(std::begin(sortedIndeces0), std::end(sortedIndeces0), [&]{ return n++; });
     std::sort( std::begin(sortedIndeces0),std::end(sortedIndeces0),[&](int i1, int i2) { return hit0phi[i1].phi()<hit0phi[i2].phi(); } );
-    std::sort( hit0phi.begin(), hit0phi.end(), RecHitsSortedInPhi::HitLessPhi());
+    std::sort( hit0phi.begin(), hit0phi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
+    /*
     for(int j=0;j <(int)n;j++){
       Hit const & hit = hits0[sortedIndeces0[j]]->hit();
       Hit const & phiHit = hit0phi[j].hit();
@@ -351,20 +352,31 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
 
       std::cout<<"[ NoPhi : ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<" Phi : ("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
 
-    }
+    }*/
 
     std::vector<Hit> hits1 = region.hits(ev,es,fourLayers[1]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit1phi;
     for (auto const & hp : hits1) hit1phi.emplace_back(hp);
-    std::vector<int> sortedIndeces1(hits0.size());
+    std::vector<int> sortedIndeces1(hits1.size());
+    std::generate(std::begin(sortedIndeces1), std::end(sortedIndeces1), [&]{ return n++; });
+    std::sort( std::begin(sortedIndeces1),std::end(sortedIndeces1),[&](int i1, int i2) { return hit1phi[i1].phi()<hit1phi[i2].phi(); } );
+    std::sort( hit1phi.begin(), hit1phi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
+
     std::vector<Hit> hits2 = region.hits(ev,es,fourLayers[2]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit2phi;
     for (auto const & hp : hits2) hit2phi.emplace_back(hp);
     std::vector<int> sortedIndeces2(hits0.size());
+    std::generate(std::begin(sortedIndeces2), std::end(sortedIndeces2), [&]{ return n++; });
+    std::sort( std::begin(sortedIndeces2),std::end(sortedIndeces2),[&](int i1, int i2) { return hit2phi[i1].phi()<hit2phi[i2].phi(); } );
+    std::sort( hit2phi.begin(), hit2phi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
+
     std::vector<Hit> hits3 = region.hits(ev,es,fourLayers[3]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit3phi;
     for (auto const & hp : hits3) hit3phi.emplace_back(hp);
-    std::vector<int> sortedIndeces3(hits0.size());
+    std::vector<int> sortedIndeces3(hits3.size());
+    std::generate(std::begin(sortedIndeces3), std::end(sortedIndeces3), [&]{ return n++; });
+    std::sort( std::begin(sortedIndeces3),std::end(sortedIndeces3),[&](int i1, int i2) { return hit3phi[i1].phi()<hit3phi[i2].phi(); } );
+    std::sort( hit3phi.begin(), hit3phi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
 
     auto const & doublets1 = caDoubletsGenerator.doublets(region,ev,es,fourLayers[0],fourLayers[1],&innerTree);
     //std::cout<<"INNER LAYER :  " <<fourLayers[0].name()<<"    "<<"OUTER LAYER :  " <<fourLayers[1].name()<<std::endl;
@@ -387,7 +399,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
       auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
 
         cadoublets<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
-        cadoublets<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
+        //cadoublets<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
     }
 
 

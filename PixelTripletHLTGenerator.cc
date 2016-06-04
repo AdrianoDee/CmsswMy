@@ -88,10 +88,30 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
 
 
   auto const & doublets = thePairGenerator->doublets(region,ev,es, pairLayers);
+  std::size_t n(0);
+
   const RecHitsSortedInPhi* innerHitsMap = &(*theLayerCache)(pairLayers[0],region,ev,es);
   const RecHitsSortedInPhi* outerHitsMap = &(*theLayerCache)(pairLayers[1],region,ev,es);
   std::vector<Hit> innerHits = innerHitsMap->hits();
+  std::vector<Hit> innerRegionHits = region.hits(ev,es,pairLayers[0]);
   std::vector<Hit> outerHits = innerHitsMap->hits();
+  std::vector<Hit> outerRegionHits = region.hits(ev,es,pairLayers[1]);
+
+
+  std::vector<RecHitsSortedInPhi::HitWithPhi> innerRegionHitsPhi;
+  for (auto const & hp : innerRegionHits) innerRegionHitsPhi.emplace_back(hp);
+  std::vector<int> sortedIndecesInner(innerRegionHits.size());
+  std::generate(std::begin(sortedIndecesInner), std::end(sortedIndecesInner), [&]{ return n++; });
+  std::sort( std::begin(sortedIndecesInner),std::end(sortedIndecesInner),[&](int i1, int i2) { return innerRegionHitsPhi[i1].phi()<innerRegionHitsPhi[i2].phi(); } );
+  std::sort( innerRegionHitsPhi.begin(), innerRegionHitsPhi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
+
+  std::vector<RecHitsSortedInPhi::HitWithPhi> outerRegionHitsPhi;
+  for (auto const & hp : outerRegionHits) outerRegionHitsPhi.emplace_back(hp);
+  std::vector<int> sortedIndecesOuter(outerRegionHits.size());
+  std::generate(std::begin(sortedIndecesOuter), std::end(sortedIndecesOuter), [&]{ return n++; });
+  std::sort( std::begin(sortedIndecesOuter),std::end(sortedIndecesOuter),[&](int i1, int i2) { return outerRegionHitsPhi[i1].phi()<outerRegionHitsPhi[i2].phi(); } );
+  std::sort( outerRegionHitsPhi.begin(), outerRegionHitsPhi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
+
 
   //std::cout<<"INNER LAYER :  " <<pairLayers[0].name()<<"    "<<"OUTER LAYER :  " <<pairLayers[1].name()<<std::endl;
   //std::cout<<"Legacy Doublets : done!"<<std::endl;
@@ -100,6 +120,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   legacy<<"==========================["<<pairLayers[0].name()<<" - "<<pairLayers[1].name()<<"]=========================="<<std::endl;
   legacy<<"====== "<<doublets.size()<<" Legacy doublets found!"<<std::endl;
     for(int j=0;j <(int)doublets.size();j++){
+        std::cout<<"No phi ------"<<std::endl;
         std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
         std::cout<<"Inner hit "<<innerHitsMap->x[doublets.innerHitId(j)]<<" - "<<innerHitsMap->y[doublets.innerHitId(j)]<<" - "<<innerHitsMap->z[doublets.innerHitId(j)]<<std::endl;
 
@@ -113,6 +134,23 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
         auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
         auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
+        std::cout<<"Yes phi ------"<<std::endl;
+        int innerPhi = sortedIndecesInner[doublets.innerHitId(j)];
+        int outerPhi = sortedIndecesOuter[doublets.outerHitId(j)];
+        std::cout<<" [ "<<innerPhi <<" - "<<outerPhi<<" ]  ";
+        std::cout<<"Inner hit "<<innerHitsMap->x[doublets.innerHitId(j)]<<" - "<<innerHitsMap->y[doublets.innerHitId(j)]<<" - "<<innerHitsMap->z[doublets.innerHitId(j)]<<std::endl;
+
+        Hit const & innerHit = innerHits[doublets.innerHitId(j)]->hit();
+        Hit const & outerHit = outerHits[doublets.outerHitId(j)]->hit();
+        auto const & gsInner = innerHit->globalState();
+        auto const & gsOuter = outerHit->globalState();
+        //auto locInner = gsInner.position-region.origin().basicVector();
+        //auto locOuter = gsOuter.position-region.origin().basicVector();
+
+        auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
+        auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
+        auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
+
 
           legacy<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
           legacy<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
