@@ -123,7 +123,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         std::cout<<"No phi ------"<<std::endl;
         std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
         std::cout<<"Inner hit "<<innerHitsMap->x[doublets.innerHitId(j)]<<" - "<<innerHitsMap->y[doublets.innerHitId(j)]<<" - "<<innerHitsMap->z[doublets.innerHitId(j)]<<std::endl;
-
+       /*
         Hit const & innerHit = innerRegionHits[doublets.innerHitId(j)].hit();
         Hit const & outerHit = outerRegionHits[doublets.outerHitId(j)].hit();
         auto const & gsInner = innerHit->globalState();
@@ -133,7 +133,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
 
         auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
         auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
-        auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
+        auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();*/
         std::cout<<"Yes phi ------"<<std::endl;
         int innerPhi = sortedIndecesInner[doublets.innerHitId(j)];
         int outerPhi = sortedIndecesOuter[doublets.outerHitId(j)];
