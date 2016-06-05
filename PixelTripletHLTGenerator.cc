@@ -140,8 +140,8 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         std::cout<<" [ "<<innerPhi <<" - "<<outerPhi<<" ]  ";
         std::cout<<"Inner hit "<<innerHitsMap->x[doublets.innerHitId(j)]<<" - "<<innerHitsMap->y[doublets.innerHitId(j)]<<" - "<<innerHitsMap->z[doublets.innerHitId(j)]<<std::endl;
 
-        Hit const & innerHitPhi = innerRegionHitsPhi[doublets.innerHitId(j)]->hit();
-        Hit const & outerHitPhi = outerRegionHitsPhi[doublets.outerHitId(j)]->hit();
+        Hit const & innerHitPhi = innerRegionHitsPhi[doublets.innerHitId(j)].hit();
+        Hit const & outerHitPhi = outerRegionHitsPhi[doublets.outerHitId(j)].hit();
         auto const & gsInnerPhi = innerHitPhi->globalState();
         auto const & gsOuterPhi = outerHitPhi->globalState();
         //auto locInner = gsInner.position-region.origin().basicVector();
