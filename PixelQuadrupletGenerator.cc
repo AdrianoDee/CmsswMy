@@ -400,7 +400,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
 
         //cadoublets<<" [ "<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<" ]  ";
         //cadoublets<<"[ ("<<xI<<" ; "<<yI<<" ; "<<zI<<")"<<"("<<xO<<" ; "<<yO<<" ; "<<zO<<") ]"<<std::endl;
-        cadoublets<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j);
+        cadoublets<<doublets1.innerHitId(j) <<" - "<<doublets1.outerHitId(j)<<std::endl;
     }
 
 
