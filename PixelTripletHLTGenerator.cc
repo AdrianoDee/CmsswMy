@@ -124,8 +124,8 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
         std::cout<<"Inner hit "<<innerHitsMap->x[doublets.innerHitId(j)]<<" - "<<innerHitsMap->y[doublets.innerHitId(j)]<<" - "<<innerHitsMap->z[doublets.innerHitId(j)]<<std::endl;
 
-        Hit const & innerHit = innerHits[doublets.innerHitId(j)]->hit();
-        Hit const & outerHit = outerHits[doublets.outerHitId(j)]->hit();
+        Hit const & innerHit = innerRegionHits[doublets.innerHitId(j)]->hit();
+        Hit const & outerHit = outerRegionHits[doublets.outerHitId(j)]->hit();
         auto const & gsInner = innerHit->globalState();
         auto const & gsOuter = outerHit->globalState();
         //auto locInner = gsInner.position-region.origin().basicVector();
@@ -142,14 +142,14 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
 
         Hit const & innerHitPhi = innerRegionHitsPhi[doublets.innerHitId(j)]->hit();
         Hit const & outerHitPhi = outerRegionHitsPhi[doublets.outerHitId(j)]->hit();
-        auto const & gsInner = innerHit->globalState();
-        auto const & gsOuter = outerHit->globalState();
+        auto const & gsInnerPhi = innerHitPhi->globalState();
+        auto const & gsOuterPhi = outerHitPhi->globalState();
         //auto locInner = gsInner.position-region.origin().basicVector();
         //auto locOuter = gsOuter.position-region.origin().basicVector();
 
-        auto zI = gsInner.position.z(); auto zO = gsOuter.position.z();
-        auto xI = gsInner.position.x(); auto xO = gsOuter.position.x();
-        auto yI = gsInner.position.y(); auto yO = gsOuter.position.y();
+        auto zIPhi = gsInnerPhi.position.z(); auto zOPhi = gsOuterPhi.position.z();
+        auto xIPhi = gsInnerPhi.position.x(); auto xOPhi = gsOuterPhi.position.x();
+        auto yIPhi = gsInnerPhi.position.y(); auto yOPhi = gsOuterPhi.position.y();
 
 
           legacy<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
