@@ -153,7 +153,7 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
 
 
           //legacy<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
-          legacy<<" [ "<<innerPhi<<" - "<<outerPhi<<" ]  ";
+          //legacy<<" [ "<<innerPhi<<" - "<<outerPhi<<" ]  ";
           legacy<<innerPhi<<" - "<<outerPhi<<std::endl;
           //legacy<<"[ ("<<zIPhi<<" ; "<<xIPhi<<" ; "<<yIPhi<<")"<<"("<<zOPhi<<" ; "<<xOPhi<<" ; "<<yOPhi<<") ]"<<std::endl;
     }
