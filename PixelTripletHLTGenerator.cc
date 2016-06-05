@@ -120,10 +120,10 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
   legacy<<"==========================["<<pairLayers[0].name()<<" - "<<pairLayers[1].name()<<"]=========================="<<std::endl;
   legacy<<"====== "<<doublets.size()<<" Legacy doublets found!"<<std::endl;
     for(int j=0;j <(int)doublets.size();j++){
-        std::cout<<"No phi ------"<<std::endl;
+        /*std::cout<<"No phi ------"<<std::endl;
         std::cout<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
         std::cout<<"Inner hit "<<innerHitsMap->x[doublets.innerHitId(j)]<<" - "<<innerHitsMap->y[doublets.innerHitId(j)]<<" - "<<innerHitsMap->z[doublets.innerHitId(j)]<<std::endl;
-       /*
+
         Hit const & innerHit = innerRegionHits[doublets.innerHitId(j)].hit();
         Hit const & outerHit = outerRegionHits[doublets.outerHitId(j)].hit();
         auto const & gsInner = innerHit->globalState();
@@ -152,7 +152,9 @@ void PixelTripletHLTGenerator::hitTriplets(const TrackingRegion& region,
         auto yIPhi = gsInnerPhi.position.y(); auto yOPhi = gsOuterPhi.position.y();
 
 
-          legacy<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
+          //legacy<<" [ "<<doublets.innerHitId(j) <<" - "<<doublets.outerHitId(j)<<" ]  ";
+          legacy<<" [ "<<innerPhi<<" - "<<outerPhi<<" ]  ";
+
           legacy<<"[ ("<<zIPhi<<" ; "<<xIPhi<<" ; "<<yIPhi<<")"<<"("<<zOPhi<<" ; "<<xOPhi<<" ; "<<yOPhi<<") ]"<<std::endl;
     }
 
