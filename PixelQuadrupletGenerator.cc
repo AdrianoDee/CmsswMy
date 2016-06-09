@@ -297,9 +297,11 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
             //layersHitsTree.push_back(&trees[j]);
         }
     }*/
-
+    std::cout<<"======== Tree for : "<<fourLayers[0].name()<<std::endl;
     LayerTree & innerTree = theKDTreeCache->getTree(fourLayers[0],region,ev,es);
+    std::cout<<"======== Tree for : "<<fourLayers[1].name()<<std::endl;
     LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
+    std::cout<<"======== Tree for : "<<fourLayers[2].name()<<std::endl;
     LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
 
     //for (int j=0; j<4; j++) {
