@@ -303,6 +303,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
     std::cout<<"======== Tree for : "<<fourLayers[2].name()<<std::endl;
     LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
+    std::cout<<"Trees done"<<std::endl;
 
     //for (int j=0; j<4; j++) {
     //    if(fourLayers[j]) std::cout<<fourLayers[j].hits()[61]->globalState().r;

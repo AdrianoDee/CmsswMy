@@ -69,10 +69,11 @@ public:
 
           std::cout<<"Nullptr : let's do the tree!"<<std::endl;
           buffer->FKDTree<float,3>::make_FKDTreeFromRegionLayer(layer,region,iE,iS);
-
+          std::cout<<"Tree done and buffered"<<std::endl;
           cache = buffer;
+          std::cout<<"Tree done and cached"<<std::endl;
           theCache.add(key,cache);
-
+          std::cout<<"Tree added"<<std::endl;
       }
 
       return *cache;}
