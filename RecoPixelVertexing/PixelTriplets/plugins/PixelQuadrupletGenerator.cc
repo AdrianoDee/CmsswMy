@@ -298,11 +298,15 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
         }
     }*/
     std::cout<<"======== Tree for : "<<fourLayers[0].name()<<std::endl;
-    LayerTree & innerTree = theKDTreeCache->getTree(fourLayers[0],region,ev,es);
+    LayerTree innerTree;  innerTree.LayerTree::make_FKDTreeFromRegionLayer(fourLayers[0],region,ev,es);
+    //LayerTree & innerTree = theKDTreeCache->getTree(fourLayers[0],region,ev,es);
     std::cout<<"======== Tree for : "<<fourLayers[1].name()<<std::endl;
-    LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
+    LayerTree middleTree;  middleTree.LayerTree::make_FKDTreeFromRegionLayer(fourLayers[1],region,ev,es);
+    //LayerTree & middleTree = theKDTreeCache->getTree(fourLayers[1],region,ev,es);
     std::cout<<"======== Tree for : "<<fourLayers[2].name()<<std::endl;
-    LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
+    LayerTree outerTree;  outerTree.LayerTree::make_FKDTreeFromRegionLayer(fourLayers[2],region,ev,es);
+    //LayerTree & outerTree = theKDTreeCache->getTree(fourLayers[2],region,ev,es);
+
     std::cout<<"Trees done"<<std::endl;
 
     //for (int j=0; j<4; j++) {
