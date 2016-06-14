@@ -336,7 +336,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     */
 
     //if (&innerTree == nullptr) std::cout<<"CAZZOOOOOOO!"<<std::endl;
-
+    /*
     std::size_t n(0);
     std::vector<Hit> hits0 = region.hits(ev,es,fourLayers[0]);
     std::vector<RecHitsSortedInPhi::HitWithPhi> hit0phi;
@@ -344,7 +344,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     std::vector<int> sortedIndeces0(hits0.size());
     std::generate(std::begin(sortedIndeces0), std::end(sortedIndeces0), [&]{ return n++; });
     std::sort( std::begin(sortedIndeces0),std::end(sortedIndeces0),[&](int i1, int i2) { return hit0phi[i1].phi()<hit0phi[i2].phi(); } );
-    std::sort( hit0phi.begin(), hit0phi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;
+    std::sort( hit0phi.begin(), hit0phi.end(), RecHitsSortedInPhi::HitLessPhi()); n=0;*/
     /*
     for(int j=0;j <(int)n;j++){
       Hit const & hit = hits0[sortedIndeces0[j]]->hit();
