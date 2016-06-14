@@ -314,6 +314,7 @@ void PixelQuadrupletGenerator::hitQuadruplets( const TrackingRegion& region, Ord
     //}
 
     //TESTING
+    /*
     std::vector<unsigned int> idS = innerTree.getIdVector();
 
     if(innerTree.empty()) std::cout<<"Tree Empty"<<std::endl;
