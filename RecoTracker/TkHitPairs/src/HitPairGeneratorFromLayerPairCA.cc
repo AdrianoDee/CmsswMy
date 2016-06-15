@@ -210,12 +210,14 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 			  lowerLimit = std::min(bufferrange.max(),lowerLimit);
 			  lowerLimit = std::min(bufferrange.min(),lowerLimit);
 
-			  std::cout<<"At : "<<uInner<<" - ";
-			  std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
+			  //std::cout<<"At : "<<uInner<<" - ";
+			  //std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
 
 		  }
 
 		  std::cout<<"Final range : "<<lowerLimit<<" - "<<upperLimit<<std::endl;
+      std::cout<<"Phi : "<<std::endl;
+      std::cout<<"Phi : "<<std::endl;
 		  //rangesDone = true;
 
 		}
