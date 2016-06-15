@@ -180,7 +180,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     float oY = gs.position.y();
     float oZ = gs.position.z();
     float oRv = loc.perp();
-	std::cout<<"Hit : "<<oX<<" - "<<oY<<" - "<<oZ<<std::endl;
+	  std::cout<<"Hit : "<<oX<<" - "<<oY<<" - "<<oZ<<std::endl;
     float oDrphi = gs.errorRPhi;
     float oDr = gs.errorR;
     float oDz = gs.errorZ;
@@ -192,6 +192,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
     if(!checkRZ) continue;
 
+    double rangeRatios = 0.0;
 
 	  if(!rangesDone){
 		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
@@ -212,12 +213,14 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
 
 			  //std::cout<<"At : "<<uInner<<" - ";
 			  //std::cout<<"Allowed range : "<<bufferrange.min()<<" - "<<bufferrange.max()<<std::endl;
+        rangeRatios = std::max((upperLimit-lowerlimit)/(bufferrange.min()-bufferrange.max()),rangeRatios);
 
 		  }
 
 		  std::cout<<"Final range : "<<lowerLimit<<" - "<<upperLimit<<std::endl;
-      std::cout<<"Phi : "<<std::endl;
-      std::cout<<"Phi : "<<std::endl;
+      std::cout<<"Phi : "<<loc.barePhi();<<std::endl;
+      std::cout<<"Zeta : "<<oZ<<std::endl;
+      std::cout<<"R : "<<oRv<<std::endl;
 		  //rangesDone = true;
 
 		}
