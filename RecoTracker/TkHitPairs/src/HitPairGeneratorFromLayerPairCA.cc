@@ -192,7 +192,7 @@ HitDoubletsCA HitPairGeneratorFromLayerPairCA::doublets (const TrackingRegion& r
     const HitRZCompatibility *checkRZ = reg.checkRZ(innerLayer.detLayer(), ohit, es, outerLayer.detLayer(), oRv, oZ, oDr, oDz);
     if(!checkRZ) continue;
 
-    double rangeRatios = 0.0;
+    float rangeRatios = 0.0;
 
 	  if(!rangesDone){
 		  for(int ii = 0; ii!=int(innerLayer.hits().size()); ++ii){
