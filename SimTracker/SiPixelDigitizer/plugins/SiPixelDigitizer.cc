@@ -151,7 +151,7 @@ namespace cms
 
          std::cout<<"================================================"<<std::endl;
          std::cout<<"PSimHit "<<counter<<std::endl;
-         std::cout<<"Track id : "<<(*it).trackId()<<"Particle id : "<<(*it). particleType()<<std::endl;
+         std::cout<<"Track id : "<<(*it).trackId()<<" Particle id : "<<(*it). particleType()<<" Det id: "<<(*it).detUnitId()<<std::endl;
          std::cout<<" x : "<<(*it).localPosition().x()<<" y : "<<(*it).localPosition().y()<<" z : "<<(*it).localPosition().z()<<std::endl;
 
          counter++;
