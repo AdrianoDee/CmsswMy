@@ -137,6 +137,7 @@ namespace cms
 					const unsigned int tofBin,
 					CLHEP::HepRandomEngine* engine,
 					edm::EventSetup const& iSetup) {
+    std::cout<<"SiPixelDigitizer::accumulatePixelHits : IN!"<<std::endl;
     if(hSimHits.isValid()) {
        std::set<unsigned int> detIds;
        std::vector<PSimHit> const& simHits = *hSimHits.product();
@@ -173,6 +174,7 @@ namespace cms
 
   void
   SiPixelDigitizer::initializeEvent(edm::Event const& e, edm::EventSetup const& iSetup) {
+    std::cout<<"SiPixelDigitizer::initializeEvent : IN!"<<std::endl;
     if(firstInitializeEvent_){
       _pixeldigialgo->init(iSetup);
       firstInitializeEvent_ = false;
@@ -212,6 +214,7 @@ namespace cms
 
   void
   SiPixelDigitizer::accumulate(edm::Event const& iEvent, edm::EventSetup const& iSetup) {
+    std::cout<<"SiPixelDigitizer::accumulate : IN!"<<std::endl;
     // Step A: Get Inputs
     for(vstring::const_iterator i = trackerContainers.begin(), iEnd = trackerContainers.end(); i != iEnd; ++i) {
       edm::Handle<std::vector<PSimHit> > simHits;
@@ -253,7 +256,7 @@ namespace cms
   // ------------ method called to produce the data  ------------
   void
   SiPixelDigitizer::finalizeEvent(edm::Event& iEvent, const edm::EventSetup& iSetup) {
-
+    std::cout<<"SiPixelDigitizer::finalizeEvent : IN!"<<std::endl;
     edm::Service<edm::RandomNumberGenerator> rng;
     CLHEP::HepRandomEngine* engine = &rng->getEngine(iEvent.streamID());
 
@@ -308,6 +311,7 @@ namespace cms
   }
 
   CLHEP::HepRandomEngine* SiPixelDigitizer::randomEngine(edm::StreamID const& streamID) {
+    std::cout<<"SiPixelDigitizer::randomEngine : IN!"<<std::endl;
     unsigned int index = streamID.value();
     if(index >= randomEngines_.size()) {
       randomEngines_.resize(index + 1, nullptr);
